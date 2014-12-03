@@ -1,0 +1,21 @@
+#
+# This file contains extra pkgconfig build requirements that don't get picked up but are 
+# desirable. One name per line, no whitespace.
+#
+python-dev
+zlib-dev
+libtool
+ncurses-dev
+glib-dev
+usbredir-dev
+m4
+automake-dev
+libtool-dev
+libaio-dev
+gnutls-dev
+nettle-dev
+lzo-dev
+numactl-dev
+curl-dev
+libjpeg-turbo-dev
+libcap-ng-dev

@@ -1,0 +1,26 @@
+From 48f2ce4f15104daf8508ee41afdc85955a728624 Mon Sep 17 00:00:00 2001
+From: Ikey Doherty <michael.i.doherty@intel.com>
+Date: Tue, 2 Jun 2015 14:09:44 +0100
+Subject: [PATCH] Use widechar ncurses
+
+Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
+---
+ configure | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure b/configure
+index 6969f6f..98b495f 100755
+--- a/configure
++++ b/configure
+@@ -2677,7 +2677,7 @@ if test "$curses" != "no" ; then
+   if test "$mingw32" = "yes" ; then
+     curses_list="-lpdcurses"
+   else
+-    curses_list="$($pkg_config --libs ncurses 2>/dev/null):-lncurses:-lcurses"
++    curses_list="$($pkg_config --libs ncursesw 2>/dev/null):-lncursesw:-lcursesw"
+   fi
+   curses_found=no
+   cat > $TMPC << EOF
+-- 
+1.9.1
+

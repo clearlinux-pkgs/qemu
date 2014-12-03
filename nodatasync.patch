@@ -1,0 +1,60 @@
+fdatasync() is very expensive... and overkill for some key scenarios.
+
+so make it optional.
+
+
+--- qemu-2.4.0/util/cutils.c~	2015-08-11 15:11:14.000000000 -0400
++++ qemu-2.4.0/util/cutils.c	2015-08-26 11:24:02.108774647 -0400
+@@ -150,6 +150,13 @@
+     return 32 - clz32(i);
+ }
+ 
++static int no_datasync;
++
++void qemu_inhibit_fdatasync(void)
++{
++	no_datasync = 1;
++}
++
+ /*
+  * Make sure data goes on disk, but if possible do not bother to
+  * write out the inode just for timestamp updates.
+@@ -159,6 +166,8 @@
+  */
+ int qemu_fdatasync(int fd)
+ {
++    if (no_datasync)
++	return 0;
+ #ifdef CONFIG_FDATASYNC
+     return fdatasync(fd);
+ #else
+--- qemu-2.4.0/include/qemu-common.h~	2015-08-11 15:11:08.000000000 -0400
++++ qemu-2.4.0/include/qemu-common.h	2015-08-26 11:24:58.869065045 -0400
+@@ -270,6 +270,7 @@
+ char *qemu_strsep(char **input, const char *delim);
+ time_t mktimegm(struct tm *tm);
+ int qemu_fls(int i);
++void qemu_inhibit_fdatasync(void);
+ int qemu_fdatasync(int fd);
+ int fcntl_setfl(int fd, int flag);
+ int qemu_parse_fd(const char *param);
+--- qemu-2.4.0/qemu-img.c~	2015-08-11 15:11:09.000000000 -0400
++++ qemu-2.4.0/qemu-img.c	2015-08-26 11:26:23.860002512 -0400
+@@ -276,6 +276,8 @@
+     Error *local_err = NULL;
+     bool quiet = false;
+ 
++    qemu_inhibit_fdatasync();
++
+     for(;;) {
+         c = getopt(argc, argv, "F:b:f:he6o:q");
+         if (c == -1) {
+@@ -2794,6 +2796,8 @@
+         },
+     };
+ 
++    qemu_inhibit_fdatasync();
++
+     /* Remove size from argv manually so that negative numbers are not treated
+      * as options by getopt. */
+     if (argc < 3) {

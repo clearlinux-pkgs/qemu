@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.4.0
-Release  : 26
+Release  : 27
 URL      : http://wiki.qemu-project.org/download/qemu-2.4.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.4.0.tar.bz2
 Summary  : OpenBIOS development utilities
@@ -13,7 +13,9 @@ License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.
 Requires: qemu-bin
 Requires: qemu-data
 BuildRequires : automake-dev
+BuildRequires : bison
 BuildRequires : curl-dev
+BuildRequires : flex
 BuildRequires : glib-dev
 BuildRequires : gnutls-dev
 BuildRequires : libaio-dev

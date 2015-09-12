@@ -19,3 +19,5 @@ numactl-dev
 curl-dev
 libjpeg-turbo-dev
 libcap-ng-dev
+bison
+flex

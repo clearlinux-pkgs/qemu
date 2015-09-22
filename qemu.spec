@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.4.0
-Release  : 27
+Release  : 28
 URL      : http://wiki.qemu-project.org/download/qemu-2.4.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.4.0.tar.bz2
 Summary  : OpenBIOS development utilities
@@ -81,7 +81,12 @@ data components for the qemu package.
 %patch5 -p1
 
 %build
-%configure --disable-static --disable-sdl  --enable-kvm --enable-usb-redir --enable-curses --enable-system  --disable-strip
+%configure --disable-static --disable-sdl \
+--enable-kvm \
+--enable-usb-redir \
+--enable-curses \
+--disable-strip \
+--target-list='i386-softmmu x86_64-softmmu i386-linux-user x86_64-linux-user'
 make V=1  %{?_smp_mflags}
 
 %check
@@ -99,65 +104,13 @@ rm -rf %{buildroot}
 
 %files bin
 %defattr(-,root,root,-)
-/usr/bin/qemu-aarch64
-/usr/bin/qemu-alpha
-/usr/bin/qemu-arm
-/usr/bin/qemu-armeb
-/usr/bin/qemu-cris
 /usr/bin/qemu-ga
 /usr/bin/qemu-i386
 /usr/bin/qemu-img
 /usr/bin/qemu-io
-/usr/bin/qemu-m68k
-/usr/bin/qemu-microblaze
-/usr/bin/qemu-microblazeel
-/usr/bin/qemu-mips
-/usr/bin/qemu-mips64
-/usr/bin/qemu-mips64el
-/usr/bin/qemu-mipsel
-/usr/bin/qemu-mipsn32
-/usr/bin/qemu-mipsn32el
 /usr/bin/qemu-nbd
-/usr/bin/qemu-or32
-/usr/bin/qemu-ppc
-/usr/bin/qemu-ppc64
-/usr/bin/qemu-ppc64abi32
-/usr/bin/qemu-ppc64le
-/usr/bin/qemu-s390x
-/usr/bin/qemu-sh4
-/usr/bin/qemu-sh4eb
-/usr/bin/qemu-sparc
-/usr/bin/qemu-sparc32plus
-/usr/bin/qemu-sparc64
-/usr/bin/qemu-system-aarch64
-/usr/bin/qemu-system-alpha
-/usr/bin/qemu-system-arm
-/usr/bin/qemu-system-cris
 /usr/bin/qemu-system-i386
-/usr/bin/qemu-system-lm32
-/usr/bin/qemu-system-m68k
-/usr/bin/qemu-system-microblaze
-/usr/bin/qemu-system-microblazeel
-/usr/bin/qemu-system-mips
-/usr/bin/qemu-system-mips64
-/usr/bin/qemu-system-mips64el
-/usr/bin/qemu-system-mipsel
-/usr/bin/qemu-system-moxie
-/usr/bin/qemu-system-or32
-/usr/bin/qemu-system-ppc
-/usr/bin/qemu-system-ppc64
-/usr/bin/qemu-system-ppcemb
-/usr/bin/qemu-system-s390x
-/usr/bin/qemu-system-sh4
-/usr/bin/qemu-system-sh4eb
-/usr/bin/qemu-system-sparc
-/usr/bin/qemu-system-sparc64
-/usr/bin/qemu-system-tricore
-/usr/bin/qemu-system-unicore32
 /usr/bin/qemu-system-x86_64
-/usr/bin/qemu-system-xtensa
-/usr/bin/qemu-system-xtensaeb
-/usr/bin/qemu-unicore32
 /usr/bin/qemu-x86_64
 /usr/libexec/qemu-bridge-helper
 

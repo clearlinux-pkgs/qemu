@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.4.0.1
-Release  : 29
+Release  : 30
 URL      : http://wiki.qemu-project.org/download/qemu-2.4.0.1.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.4.0.1.tar.bz2
 Summary  : OpenBIOS development utilities

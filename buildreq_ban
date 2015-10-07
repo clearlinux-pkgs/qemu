@@ -2,3 +2,17 @@
 # This file contains banned pkgconfig build requirements that get picked up but are 
 # undesireable desirable. One name per line, no whitespace.
 #
+
+#qboot minimal build
+libaio-dev
+ncurses-dev
+usbredir-dev
+gnutls-dev
+nettle-dev
+lzo-dev
+numactl-dev
+curl-dev
+libjpeg-turbo-dev
+libcap-ng-dev
+pkgconfig(libpng)
+pkgconfig(pixman-1)

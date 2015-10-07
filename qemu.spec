@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.4.0.1
-Release  : 30
+Release  : 31
 URL      : http://wiki.qemu-project.org/download/qemu-2.4.0.1.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.4.0.1.tar.bz2
 Summary  : OpenBIOS development utilities
@@ -14,24 +14,12 @@ Requires: qemu-bin
 Requires: qemu-data
 BuildRequires : automake-dev
 BuildRequires : bison
-BuildRequires : curl-dev
 BuildRequires : flex
 BuildRequires : glib-dev
-BuildRequires : gnutls-dev
-BuildRequires : libaio-dev
-BuildRequires : libcap-ng-dev
-BuildRequires : libjpeg-turbo-dev
 BuildRequires : libtool
 BuildRequires : libtool-dev
-BuildRequires : lzo-dev
 BuildRequires : m4
-BuildRequires : ncurses-dev
-BuildRequires : nettle-dev
-BuildRequires : numactl-dev
-BuildRequires : pkgconfig(libpng)
-BuildRequires : pkgconfig(pixman-1)
 BuildRequires : python-dev
-BuildRequires : usbredir-dev
 BuildRequires : zlib-dev
 Patch1: configure.patch
 Patch2: cores-default.patch
@@ -83,8 +71,6 @@ data components for the qemu package.
 %build
 %configure --disable-static --disable-sdl \
 --enable-kvm \
---enable-usb-redir \
---enable-curses \
 --disable-strip \
 --target-list='i386-softmmu x86_64-softmmu i386-linux-user x86_64-linux-user'
 make V=1  %{?_smp_mflags}

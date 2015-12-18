@@ -11,3 +11,5 @@ automake-dev
 libtool-dev
 bison
 flex
+gtk+-dev
+libjpeg-turbo-dev

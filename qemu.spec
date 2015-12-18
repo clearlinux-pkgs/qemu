@@ -4,18 +4,20 @@
 #
 Name     : qemu
 Version  : 2.4.1
-Release  : 32
+Release  : 33
 URL      : http://wiki.qemu-project.org/download/qemu-2.4.1.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.4.1.tar.bz2
 Summary  : OpenBIOS development utilities
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT
 Requires: qemu-bin
+Requires: qemu-locales
 Requires: qemu-data
 BuildRequires : automake-dev
 BuildRequires : bison
 BuildRequires : flex
 BuildRequires : glib-dev
+BuildRequires : gtk+-dev
 BuildRequires : libtool
 BuildRequires : libtool-dev
 BuildRequires : m4
@@ -60,6 +62,14 @@ Group: Data
 data components for the qemu package.
 
 
+%package locales
+Summary: locales components for the qemu package.
+Group: Default
+
+%description locales
+locales components for the qemu package.
+
+
 %prep
 %setup -q -n qemu-2.4.1
 %patch1 -p1
@@ -70,6 +80,8 @@ data components for the qemu package.
 
 %build
 %configure --disable-static --disable-sdl \
+--enable-vnc \
+--enable-gtk \
 --enable-kvm \
 --disable-strip \
 --target-list='i386-softmmu x86_64-softmmu i386-linux-user x86_64-linux-user'
@@ -84,6 +96,7 @@ make check
 %install
 rm -rf %{buildroot}
 %make_install
+%find_lang qemu
 
 %files
 %defattr(-,root,root,-)
@@ -183,3 +196,7 @@ rm -rf %{buildroot}
 /usr/share/qemu/vgabios-virtio.bin
 /usr/share/qemu/vgabios-vmware.bin
 /usr/share/qemu/vgabios.bin
+
+%files locales -f qemu.lang 
+%defattr(-,root,root,-)
+

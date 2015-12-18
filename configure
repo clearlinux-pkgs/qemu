@@ -1,4 +1,6 @@
 --disable-sdl
+--enable-vnc
+--enable-gtk
 --enable-kvm
 --disable-strip
 --target-list='i386-softmmu x86_64-softmmu i386-linux-user x86_64-linux-user'

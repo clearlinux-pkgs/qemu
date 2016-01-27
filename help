@@ -28,11 +28,11 @@ Standard options:
                            ppc64le-linux-user ppc64-linux-user ppc-linux-user 
                            s390x-linux-user sh4eb-linux-user sh4-linux-user 
                            sparc32plus-linux-user sparc64-linux-user 
-                           sparc-linux-user unicore32-linux-user 
-                           x86_64-linux-user
+                           sparc-linux-user tilegx-linux-user 
+                           unicore32-linux-user x86_64-linux-user
 
 Advanced options (experts only):
-  --source-path=PATH       path of source code [/home/arjan/clear/packages/qemu/qemu-2.4.1]
+  --source-path=PATH       path of source code [/home/arjan/clear/packages/qemu/qemu-2.5.0]
   --cross-prefix=PREFIX    use PREFIX for compile tools []
   --cc=CC                  use C compiler CC [cc]
   --iasl=IASL              use ACPI compiler IASL [iasl]
@@ -91,7 +91,6 @@ disabled with --disable-FEATURE, default is enabled if available:
   user            supported user emulation targets
   linux-user      all linux usermode emulation targets
   bsd-user        all BSD usermode emulation targets
-  guest-base      GUEST_BASE support for usermode emulation targets
   docs            build documentation
   guest-agent     build the QEMU Guest Agent
   guest-agent-msi build guest agent Windows MSI installation package
@@ -102,6 +101,8 @@ disabled with --disable-FEATURE, default is enabled if available:
   sparse          sparse checker
 
   gnutls          GNUTLS cryptography support
+  nettle          nettle cryptography support
+  gcrypt          libgcrypt cryptography support
   sdl             SDL UI
   --with-sdlabi     select preferred SDL ABI 1.2 or 2.0
   gtk             gtk UI
@@ -109,7 +110,6 @@ disabled with --disable-FEATURE, default is enabled if available:
   vte             vte support for the gtk UI
   curses          curses UI
   vnc             VNC UI support
-  vnc-tls         TLS encryption for VNC server
   vnc-sasl        SASL encryption for VNC server
   vnc-jpeg        JPEG lossy compression for VNC server
   vnc-png         PNG compression for VNC server
@@ -134,7 +134,7 @@ disabled with --disable-FEATURE, default is enabled if available:
   rbd             rados block device (rbd)
   libiscsi        iscsi support
   libnfs          nfs support
-  smartcard-nss   smartcard nss support
+  smartcard       smartcard support (libcacard)
   libusb          libusb (for usb passthrough)
   usb-redir       usb network redirection support
   lzo             support of lzo compression library
@@ -150,5 +150,6 @@ disabled with --disable-FEATURE, default is enabled if available:
   vhdx            support for the Microsoft VHDX image format
   numa            libnuma support
   tcmalloc        tcmalloc support
+  jemalloc        jemalloc support
 
 NOTE: The object files are built at the place where configure is launched

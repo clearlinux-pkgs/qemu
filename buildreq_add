@@ -13,3 +13,6 @@ bison
 flex
 gtk+-dev
 libjpeg-turbo-dev
+spice
+spice-protocol
+spice-dev

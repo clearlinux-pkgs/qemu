@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.5.0
-Release  : 35
+Release  : 36
 URL      : http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2
 Summary  : OpenBIOS development utilities
@@ -15,6 +15,7 @@ Requires: qemu-locales
 Requires: qemu-data
 BuildRequires : automake-dev
 BuildRequires : bison
+BuildRequires : ceph-dev
 BuildRequires : flex
 BuildRequires : glib-dev
 BuildRequires : gtk+-dev
@@ -86,7 +87,8 @@ locales components for the qemu package.
 --enable-kvm \
 --disable-strip \
 --target-list='i386-softmmu x86_64-softmmu i386-linux-user x86_64-linux-user' \
---enable-spice
+--enable-spice \
+--enable-rbd
 make V=1  %{?_smp_mflags}
 
 %check

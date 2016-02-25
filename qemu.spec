@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.5.0
-Release  : 36
+Release  : 37
 URL      : http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2
 Summary  : OpenBIOS development utilities

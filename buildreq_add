@@ -17,3 +17,7 @@ spice
 spice-protocol
 spice-dev
 ceph-dev
+libcap-ng-dev
+snappy-dev
+lzo-dev
+numactl-dev

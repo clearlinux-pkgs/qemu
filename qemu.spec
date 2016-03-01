@@ -86,6 +86,8 @@ locales components for the qemu package.
 %patch4 -p1
 
 %build
+export CFLAGS="$CFLAGS -fno-semantic-interposition -O3 -falign-functions=32"
+export CXXFLAGS="$CXXFLAGS -fno-semantic-interposition -O3 -falign-functions=32"
 %configure --disable-static --disable-sdl \
 --enable-vnc \
 --enable-gtk \

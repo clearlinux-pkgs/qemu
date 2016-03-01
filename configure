@@ -6,5 +6,6 @@
 --target-list='i386-softmmu x86_64-softmmu i386-linux-user x86_64-linux-user'
 --enable-spice
 --enable-rbd
+--extra-cflags="-fno-semantic-interposition -O3 -falign-functions=32"
 #--enable-usb-redir
 #--enable-curses

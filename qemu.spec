@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.5.0
-Release  : 38
+Release  : 39
 URL      : http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2
 Summary  : OpenBIOS development utilities
@@ -19,9 +19,13 @@ BuildRequires : ceph-dev
 BuildRequires : flex
 BuildRequires : glib-dev
 BuildRequires : gtk+-dev
+BuildRequires : libcap-ng-dev
+BuildRequires : libjpeg-turbo-dev
 BuildRequires : libtool
 BuildRequires : libtool-dev
 BuildRequires : m4
+BuildRequires : numactl-dev
+BuildRequires : pkgconfig(libpng)
 BuildRequires : python-dev
 BuildRequires : snappy-dev
 BuildRequires : spice

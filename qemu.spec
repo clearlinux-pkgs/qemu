@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.5.0
-Release  : 39
+Release  : 40
 URL      : http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2
 Summary  : OpenBIOS development utilities
@@ -36,6 +36,17 @@ Patch1: configure.patch
 Patch2: cores-default.patch
 Patch3: 0001-Use-run-lock.patch
 Patch4: 0001-Use-widechar-ncurses.patch
+Patch5: cve-2015-8558.patch
+Patch6: cve-2015-8567.patch
+Patch7: cve-2015-8613.patch
+Patch8: cve-2015-8619.patch
+Patch9: cve-2015-8701.patch
+Patch10: cve-2015-8743.patch
+Patch11: cve-2016-1568.patch
+Patch12: cve-2016-1922.patch
+Patch13: cve-2016-1981.patch
+Patch14: cve-2016-2197.patch
+Patch15: 0011-usb-check-page-select-value-while-processing-iTD.patch
 
 %description
 This package contains the OpenBIOS development utilities.
@@ -84,10 +95,19 @@ locales components for the qemu package.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
 
 %build
-export CFLAGS="$CFLAGS -fno-semantic-interposition -O3 -falign-functions=32"
-export CXXFLAGS="$CXXFLAGS -fno-semantic-interposition -O3 -falign-functions=32"
 %configure --disable-static --disable-sdl \
 --enable-vnc \
 --enable-gtk \
@@ -95,7 +115,8 @@ export CXXFLAGS="$CXXFLAGS -fno-semantic-interposition -O3 -falign-functions=32"
 --disable-strip \
 --target-list='i386-softmmu x86_64-softmmu i386-linux-user x86_64-linux-user' \
 --enable-spice \
---enable-rbd
+--enable-rbd \
+--extra-cflags="-fno-semantic-interposition -O3 -falign-functions=32"
 make V=1  %{?_smp_mflags}
 
 %check

@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.5.0
-Release  : 40
+Release  : 41
 URL      : http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.5.0.tar.bz2
 Summary  : OpenBIOS development utilities
@@ -47,6 +47,7 @@ Patch12: cve-2016-1922.patch
 Patch13: cve-2016-1981.patch
 Patch14: cve-2016-2197.patch
 Patch15: 0011-usb-check-page-select-value-while-processing-iTD.patch
+Patch16: timer.patch
 
 %description
 This package contains the OpenBIOS development utilities.
@@ -106,6 +107,7 @@ locales components for the qemu package.
 %patch13 -p1
 %patch14 -p1
 %patch15 -p1
+%patch16 -p1
 
 %build
 %configure --disable-static --disable-sdl \

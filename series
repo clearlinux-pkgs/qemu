@@ -13,3 +13,4 @@ cve-2016-1922.patch
 cve-2016-1981.patch
 cve-2016-2197.patch
 0011-usb-check-page-select-value-while-processing-iTD.patch
+timer.patch

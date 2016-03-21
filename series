@@ -14,3 +14,7 @@ cve-2016-1981.patch
 cve-2016-2197.patch
 0011-usb-check-page-select-value-while-processing-iTD.patch
 timer.patch
+qemu-0002-cache-CPUID.patch
+qemu-0004-disable-kvmvapic.patch
+qemu-0005-make-initialization-execute-in-parallel.patch
+qemu-0007-optimize-PAM.patch

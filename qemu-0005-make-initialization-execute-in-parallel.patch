@@ -1,0 +1,107 @@
+commit 6d67fb0786d232c7c0e60da3ca2f4e7db80d88f6
+Author: Anthony Xu <anthony.xu@intel.com>
+Date:   Mon Mar 14 15:25:54 2016 -0700
+
+    make initialization threads execute in parallel
+    
+    Signed-off-by: Anthony Xu <anthony.xu@intel.com>
+
+diff --git a/cpus.c b/cpus.c
+index 9592163..3ecc200 100644
+--- a/cpus.c
++++ b/cpus.c
+@@ -1013,7 +1013,7 @@ static void qemu_tcg_wait_io_event(CPUState *cpu)
+ static void qemu_kvm_wait_io_event(CPUState *cpu)
+ {
+     while (cpu_thread_is_idle(cpu)) {
+-        qemu_cond_wait(cpu->halt_cond, &qemu_global_mutex);
++        qemu_cond_wait(cpu->halt_cond, cpu->mutex);
+     }
+ 
+     qemu_kvm_eat_signals(cpu);
+@@ -1033,6 +1033,11 @@ static void *qemu_kvm_cpu_thread_fn(void *arg)
+     cpu->can_do_io = 1;
+     current_cpu = cpu;
+ 
++    /* signal CPU creation */
++    cpu->created = true;
++    qemu_cond_signal(&qemu_cpu_cond);
++    qemu_mutex_unlock_iothread();
++
+     r = kvm_init_vcpu(cpu);
+     if (r < 0) {
+         fprintf(stderr, "kvm_init_vcpu failed: %s\n", strerror(-r));
+@@ -1041,10 +1046,7 @@ static void *qemu_kvm_cpu_thread_fn(void *arg)
+ 
+     qemu_kvm_init_cpu_signals(cpu);
+ 
+-    /* signal CPU creation */
+-    cpu->created = true;
+-    qemu_cond_signal(&qemu_cpu_cond);
+-
++    qemu_mutex_lock(cpu->mutex);
+     while (1) {
+         if (cpu_can_run(cpu)) {
+             r = kvm_cpu_exec(cpu);
+@@ -1338,7 +1340,9 @@ static void qemu_kvm_start_vcpu(CPUState *cpu)
+     char thread_name[VCPU_THREAD_NAME_SIZE];
+ 
+     cpu->thread = g_malloc0(sizeof(QemuThread));
++    cpu->mutex = g_malloc0(sizeof(QemuMutex));
+     cpu->halt_cond = g_malloc0(sizeof(QemuCond));
++    qemu_mutex_init(cpu->mutex);
+     qemu_cond_init(cpu->halt_cond);
+     snprintf(thread_name, VCPU_THREAD_NAME_SIZE, "CPU %d/KVM",
+              cpu->cpu_index);
+diff --git a/include/qom/cpu.h b/include/qom/cpu.h
+index 1df7cb4..c87783c 100644
+--- a/include/qom/cpu.h
++++ b/include/qom/cpu.h
+@@ -286,6 +286,7 @@ struct CPUState {
+     uint32_t host_tid;
+     bool running;
+     struct QemuCond *halt_cond;
++    struct QemuMutex *mutex;
+     bool thread_kicked;
+     bool created;
+     bool stop;
+diff --git a/kvm-all.c b/kvm-all.c
+index a65e73f..38f283d 100644
+--- a/kvm-all.c
++++ b/kvm-all.c
+@@ -1795,7 +1795,7 @@ static void do_kvm_cpu_synchronize_post_reset(void *arg)
+ 
+ void kvm_cpu_synchronize_post_reset(CPUState *cpu)
+ {
+-    run_on_cpu(cpu, do_kvm_cpu_synchronize_post_reset, cpu);
++    async_run_on_cpu(cpu, do_kvm_cpu_synchronize_post_reset, cpu);
+ }
+ 
+ static void do_kvm_cpu_synchronize_post_init(void *arg)
+@@ -1808,7 +1808,7 @@ static void do_kvm_cpu_synchronize_post_init(void *arg)
+ 
+ void kvm_cpu_synchronize_post_init(CPUState *cpu)
+ {
+-    run_on_cpu(cpu, do_kvm_cpu_synchronize_post_init, cpu);
++    async_run_on_cpu(cpu, do_kvm_cpu_synchronize_post_init, cpu);
+ }
+ 
+ int kvm_cpu_exec(CPUState *cpu)
+@@ -1823,7 +1823,7 @@ int kvm_cpu_exec(CPUState *cpu)
+         return EXCP_HLT;
+     }
+ 
+-    qemu_mutex_unlock_iothread();
++    qemu_mutex_unlock(cpu->mutex);
+ 
+     do {
+         MemTxAttrs attrs;
+@@ -1936,7 +1936,7 @@ int kvm_cpu_exec(CPUState *cpu)
+         }
+     } while (ret == 0);
+ 
+-    qemu_mutex_lock_iothread();
++    qemu_mutex_lock(cpu->mutex);
+ 
+     if (ret < 0) {
+         cpu_dump_state(cpu, stderr, fprintf, CPU_DUMP_CODE);

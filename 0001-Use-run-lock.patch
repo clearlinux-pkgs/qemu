@@ -17,9 +17,9 @@ index 7e690ff..7dffa86 100644
  
 -#define SOCKET_PATH                "/var/lock/qemu-nbd-%s"
 +#define SOCKET_PATH                "/run/lock/qemu-nbd-%s"
- #define QEMU_NBD_OPT_CACHE         1
- #define QEMU_NBD_OPT_AIO           2
- #define QEMU_NBD_OPT_DISCARD       3
+ #define QEMU_NBD_OPT_CACHE         256
+ #define QEMU_NBD_OPT_AIO           257
+ #define QEMU_NBD_OPT_DISCARD       258
 -- 
 2.1.0
 

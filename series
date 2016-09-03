@@ -3,7 +3,3 @@ cores-default.patch
 0001-Use-run-lock.patch
 0001-Use-widechar-ncurses.patch
 timer.patch
-qemu-0002-cache-CPUID.patch
-qemu-0004-disable-kvmvapic.patch
-qemu-0005-make-initialization-execute-in-parallel.patch
-qemu-0007-optimize-PAM.patch

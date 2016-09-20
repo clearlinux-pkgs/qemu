@@ -21,3 +21,6 @@ libcap-ng-dev
 snappy-dev
 lzo-dev
 numactl-dev
+attr-dev
+libcap-ng-dev
+libcap-dev

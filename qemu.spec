@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.7.0
-Release  : 54
+Release  : 55
 URL      : http://wiki.qemu-project.org/download/qemu-2.7.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.7.0.tar.bz2
 Summary  : OpenBIOS development utilities
@@ -13,12 +13,14 @@ License  : Apache-2.0 BSD-2-Clause BSD-3-Clause GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.
 Requires: qemu-bin
 Requires: qemu-locales
 Requires: qemu-data
+BuildRequires : attr-dev
 BuildRequires : automake-dev
 BuildRequires : bison
 BuildRequires : ceph-dev
 BuildRequires : flex
 BuildRequires : glib-dev
 BuildRequires : gtk+-dev
+BuildRequires : libcap-dev
 BuildRequires : libcap-ng-dev
 BuildRequires : libjpeg-turbo-dev
 BuildRequires : libtool
@@ -97,7 +99,11 @@ export LANG=C
 --target-list='i386-softmmu x86_64-softmmu i386-linux-user x86_64-linux-user' \
 --enable-spice \
 --enable-rbd \
---extra-cflags="-O3"
+--extra-cflags="-O3" \
+--enable-attr \
+--enable-cap-ng \
+--enable-virtfs \
+--enable-vhost-net
 make V=1  %{?_smp_mflags}
 
 %check
@@ -127,6 +133,7 @@ rm -rf %{buildroot}
 /usr/bin/qemu-system-i386
 /usr/bin/qemu-system-x86_64
 /usr/bin/qemu-x86_64
+/usr/bin/virtfs-proxy-helper
 /usr/libexec/qemu-bridge-helper
 
 %files data

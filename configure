@@ -7,5 +7,9 @@
 --enable-spice
 --enable-rbd
 --extra-cflags="-O3"
+--enable-attr
+--enable-cap-ng
+--enable-virtfs
+--enable-vhost-net
 #--enable-usb-redir
 #--enable-curses

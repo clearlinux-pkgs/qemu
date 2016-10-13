@@ -21,4 +21,5 @@ librt.so.1
 libsnappy.so.1
 libspice-server.so.1
 libutil.so.1
+libuuid.so.1
 libz.so.1

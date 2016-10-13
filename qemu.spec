@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.7.0
-Release  : 56
+Release  : 57
 URL      : http://wiki.qemu-project.org/download/qemu-2.7.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.7.0.tar.bz2
 Summary  : OpenBIOS development utilities
@@ -33,6 +33,7 @@ BuildRequires : snappy-dev
 BuildRequires : spice
 BuildRequires : spice-dev
 BuildRequires : spice-protocol
+BuildRequires : util-linux-dev
 BuildRequires : zlib-dev
 Patch1: configure.patch
 Patch2: cores-default.patch
@@ -103,7 +104,9 @@ export LANG=C
 --enable-attr \
 --enable-cap-ng \
 --enable-virtfs \
---enable-vhost-net
+--enable-vhost-net \
+--enable-vhdx \
+--enable-uuid
 make V=1  %{?_smp_mflags}
 
 %check

@@ -11,5 +11,7 @@
 --enable-cap-ng
 --enable-virtfs
 --enable-vhost-net
+--enable-vhdx
+--enable-uuid
 #--enable-usb-redir
 #--enable-curses

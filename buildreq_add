@@ -24,3 +24,4 @@ numactl-dev
 attr-dev
 libcap-ng-dev
 libcap-dev
+util-linux-dev

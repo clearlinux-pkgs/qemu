@@ -1,5 +1,4 @@
 configure.patch
 cores-default.patch
 0001-Use-run-lock.patch
-0001-Use-widechar-ncurses.patch
 timer.patch

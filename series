@@ -1,4 +1,3 @@
 configure.patch
 cores-default.patch
 0001-Use-run-lock.patch
-timer.patch

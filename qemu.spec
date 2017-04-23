@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x3353C9CEF108B584 (mdroth@utexas.edu)
 #
 Name     : qemu
-Version  : 2.8.1
-Release  : 59
-URL      : http://wiki.qemu-project.org/download/qemu-2.8.1.tar.bz2
-Source0  : http://wiki.qemu-project.org/download/qemu-2.8.1.tar.bz2
-Source99 : http://wiki.qemu-project.org/download/qemu-2.8.1.tar.bz2.sig
+Version  : 2.9.0
+Release  : 60
+URL      : http://wiki.qemu-project.org/download/qemu-2.9.0.tar.bz2
+Source0  : http://wiki.qemu-project.org/download/qemu-2.9.0.tar.bz2
+Source99 : http://wiki.qemu-project.org/download/qemu-2.9.0.tar.bz2.sig
 Summary  : OpenBIOS development utilities
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT
@@ -41,7 +41,6 @@ BuildRequires : zlib-dev
 Patch1: configure.patch
 Patch2: cores-default.patch
 Patch3: 0001-Use-run-lock.patch
-Patch4: timer.patch
 
 %description
 This package contains the OpenBIOS development utilities.
@@ -85,15 +84,17 @@ locales components for the qemu package.
 
 
 %prep
-%setup -q -n qemu-2.8.1
+%setup -q -n qemu-2.9.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1491590199
+export SOURCE_DATE_EPOCH=1492960663
 %configure --disable-static --disable-sdl \
 --enable-vnc \
 --enable-gtk \
@@ -115,11 +116,11 @@ make V=1  %{?_smp_mflags}
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1491590199
+export SOURCE_DATE_EPOCH=1492960663
 rm -rf %{buildroot}
 %make_install
 %find_lang qemu

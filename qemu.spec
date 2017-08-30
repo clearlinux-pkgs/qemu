@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x3353C9CEF108B584 (mdroth@utexas.edu)
 #
 Name     : qemu
-Version  : 2.9.0
-Release  : 64
-URL      : http://wiki.qemu-project.org/download/qemu-2.9.0.tar.bz2
-Source0  : http://wiki.qemu-project.org/download/qemu-2.9.0.tar.bz2
-Source99 : http://wiki.qemu-project.org/download/qemu-2.9.0.tar.bz2.sig
+Version  : 2.10.0
+Release  : 65
+URL      : http://wiki.qemu-project.org/download/qemu-2.10.0.tar.bz2
+Source0  : http://wiki.qemu-project.org/download/qemu-2.10.0.tar.bz2
+Source99 : http://wiki.qemu-project.org/download/qemu-2.10.0.tar.bz2.sig
 Summary  : OpenBIOS development utilities
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT
@@ -30,8 +30,12 @@ BuildRequires : libtool
 BuildRequires : libtool-dev
 BuildRequires : m4
 BuildRequires : numactl-dev
+BuildRequires : pbr
+BuildRequires : pip
 BuildRequires : pkgconfig(libpng)
 BuildRequires : python-dev
+BuildRequires : python3-dev
+BuildRequires : setuptools
 BuildRequires : snappy-dev
 BuildRequires : spice
 BuildRequires : spice-dev
@@ -41,7 +45,6 @@ BuildRequires : zlib-dev
 Patch1: configure.patch
 Patch2: cores-default.patch
 Patch3: 0001-Use-run-lock.patch
-Patch4: 0001-Replace-struct-ucontext-with-ucontext_t-type.patch
 
 %description
 This package contains the OpenBIOS development utilities.
@@ -85,18 +88,17 @@ locales components for the qemu package.
 
 
 %prep
-%setup -q -n qemu-2.9.0
+%setup -q -n qemu-2.10.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1503539761
+export SOURCE_DATE_EPOCH=1504118676
 %configure --disable-static --disable-sdl \
 --enable-vnc \
 --enable-gtk \
@@ -122,7 +124,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1503539761
+export SOURCE_DATE_EPOCH=1504118676
 rm -rf %{buildroot}
 %make_install
 %find_lang qemu
@@ -217,7 +219,9 @@ rm -rf %{buildroot}
 /usr/share/qemu/pxe-virtio.rom
 /usr/share/qemu/qemu-icon.bmp
 /usr/share/qemu/qemu_logo_no_text.svg
+/usr/share/qemu/qemu_vga.ndrv
 /usr/share/qemu/s390-ccw.img
+/usr/share/qemu/s390-netboot.img
 /usr/share/qemu/sgabios.bin
 /usr/share/qemu/skiboot.lid
 /usr/share/qemu/slof.bin

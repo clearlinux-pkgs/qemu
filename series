@@ -1,4 +1,3 @@
 configure.patch
 cores-default.patch
 0001-Use-run-lock.patch
-0001-Replace-struct-ucontext-with-ucontext_t-type.patch

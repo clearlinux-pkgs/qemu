@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 2.10.0
-Release  : 65
+Release  : 66
 URL      : http://wiki.qemu-project.org/download/qemu-2.10.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.10.0.tar.bz2
 Source99 : http://wiki.qemu-project.org/download/qemu-2.10.0.tar.bz2.sig
@@ -14,6 +14,7 @@ Summary  : OpenBIOS development utilities
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT
 Requires: qemu-bin
+Requires: qemu-setuid
 Requires: qemu-locales
 Requires: qemu-data
 BuildRequires : attr-dev
@@ -66,6 +67,7 @@ Authors:
 Summary: bin components for the qemu package.
 Group: Binaries
 Requires: qemu-data
+Requires: qemu-setuid
 
 %description bin
 bin components for the qemu package.
@@ -87,6 +89,14 @@ Group: Default
 locales components for the qemu package.
 
 
+%package setuid
+Summary: setuid components for the qemu package.
+Group: Default
+
+%description setuid
+setuid components for the qemu package.
+
+
 %prep
 %setup -q -n qemu-2.10.0
 %patch1 -p1
@@ -98,7 +108,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1504118676
+export SOURCE_DATE_EPOCH=1505422245
 %configure --disable-static --disable-sdl \
 --enable-vnc \
 --enable-gtk \
@@ -124,7 +134,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1504118676
+export SOURCE_DATE_EPOCH=1505422245
 rm -rf %{buildroot}
 %make_install
 %find_lang qemu
@@ -134,6 +144,7 @@ rm -rf %{buildroot}
 
 %files bin
 %defattr(-,root,root,-)
+%exclude /usr/libexec/qemu-bridge-helper
 /usr/bin/ivshmem-client
 /usr/bin/ivshmem-server
 /usr/bin/qemu-ga
@@ -145,7 +156,6 @@ rm -rf %{buildroot}
 /usr/bin/qemu-system-x86_64
 /usr/bin/qemu-x86_64
 /usr/bin/virtfs-proxy-helper
-/usr/libexec/qemu-bridge-helper
 
 %files data
 %defattr(-,root,root,-)
@@ -234,6 +244,10 @@ rm -rf %{buildroot}
 /usr/share/qemu/vgabios-virtio.bin
 /usr/share/qemu/vgabios-vmware.bin
 /usr/share/qemu/vgabios.bin
+
+%files setuid
+%defattr(-,root,root,-)
+%attr(4755, root, root) /usr/libexec/qemu-bridge-helper
 
 %files locales -f qemu.lang
 %defattr(-,root,root,-)

@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 2.10.0
-Release  : 66
+Release  : 67
 URL      : http://wiki.qemu-project.org/download/qemu-2.10.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.10.0.tar.bz2
 Source99 : http://wiki.qemu-project.org/download/qemu-2.10.0.tar.bz2.sig
@@ -81,6 +81,14 @@ Group: Data
 data components for the qemu package.
 
 
+%package extras
+Summary: extras components for the qemu package.
+Group: Default
+
+%description extras
+extras components for the qemu package.
+
+
 %package locales
 Summary: locales components for the qemu package.
 Group: Default
@@ -108,7 +116,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1505422245
+export SOURCE_DATE_EPOCH=1506966067
 %configure --disable-static --disable-sdl \
 --enable-vnc \
 --enable-gtk \
@@ -134,7 +142,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1505422245
+export SOURCE_DATE_EPOCH=1506966067
 rm -rf %{buildroot}
 %make_install
 %find_lang qemu
@@ -144,12 +152,12 @@ rm -rf %{buildroot}
 
 %files bin
 %defattr(-,root,root,-)
+%exclude /usr/bin/qemu-img
 %exclude /usr/libexec/qemu-bridge-helper
 /usr/bin/ivshmem-client
 /usr/bin/ivshmem-server
 /usr/bin/qemu-ga
 /usr/bin/qemu-i386
-/usr/bin/qemu-img
 /usr/bin/qemu-io
 /usr/bin/qemu-nbd
 /usr/bin/qemu-system-i386
@@ -244,6 +252,10 @@ rm -rf %{buildroot}
 /usr/share/qemu/vgabios-virtio.bin
 /usr/share/qemu/vgabios-vmware.bin
 /usr/share/qemu/vgabios.bin
+
+%files extras
+%defattr(-,root,root,-)
+/usr/bin/qemu-img
 
 %files setuid
 %defattr(-,root,root,-)

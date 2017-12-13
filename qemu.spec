@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x3353C9CEF108B584 (mdroth@utexas.edu)
 #
 Name     : qemu
-Version  : 2.10.1
-Release  : 68
-URL      : http://wiki.qemu-project.org/download/qemu-2.10.1.tar.bz2
-Source0  : http://wiki.qemu-project.org/download/qemu-2.10.1.tar.bz2
-Source99 : http://wiki.qemu-project.org/download/qemu-2.10.1.tar.bz2.sig
-Summary  : OPAL firmware
+Version  : 2.11.0
+Release  : 69
+URL      : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2
+Source0  : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2
+Source99 : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2.sig
+Summary  : A lightweight multi-platform, multi-architecture disassembly framework
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT
 Requires: qemu-bin
@@ -21,6 +21,7 @@ BuildRequires : attr-dev
 BuildRequires : automake-dev
 BuildRequires : bison
 BuildRequires : ceph-dev
+BuildRequires : cmake
 BuildRequires : flex
 BuildRequires : glib-dev
 BuildRequires : gtk+-dev
@@ -33,7 +34,6 @@ BuildRequires : m4
 BuildRequires : numactl-dev
 BuildRequires : pbr
 BuildRequires : pip
-BuildRequires : pkgconfig(libpng)
 BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : setuptools
@@ -48,9 +48,8 @@ Patch2: cores-default.patch
 Patch3: 0001-Use-run-lock.patch
 
 %description
-This package provides a daemon to load and run the OpenPower firmware's
-Processor Recovery Diagnostics binary. This is responsible for run time
-maintenance of OpenPower Systems hardware.
+Capstone is a disassembly framework with the target of becoming the ultimate
+disasm engine for binary analysis and reversing in the security community.
 
 %package bin
 Summary: bin components for the qemu package.
@@ -95,7 +94,7 @@ setuid components for the qemu package.
 
 
 %prep
-%setup -q -n qemu-2.10.1
+%setup -q -n qemu-2.11.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -105,7 +104,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506998356
+export SOURCE_DATE_EPOCH=1513200283
 %configure --disable-static --disable-sdl \
 --enable-vnc \
 --enable-gtk \
@@ -121,7 +120,7 @@ export SOURCE_DATE_EPOCH=1506998356
 --enable-vhost-net \
 --enable-vhdx \
 --enable-uuid
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
@@ -131,7 +130,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1506998356
+export SOURCE_DATE_EPOCH=1513200283
 rm -rf %{buildroot}
 %make_install
 %find_lang qemu
@@ -149,6 +148,7 @@ rm -rf %{buildroot}
 /usr/bin/qemu-i386
 /usr/bin/qemu-io
 /usr/bin/qemu-nbd
+/usr/bin/qemu-pr-helper
 /usr/bin/qemu-system-i386
 /usr/bin/qemu-system-x86_64
 /usr/bin/qemu-x86_64

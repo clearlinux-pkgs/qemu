@@ -6,13 +6,13 @@
 #
 Name     : qemu
 Version  : 2.11.0
-Release  : 69
+Release  : 70
 URL      : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2
 Source99 : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2.sig
 Summary  : A lightweight multi-platform, multi-architecture disassembly framework
 Group    : Development/Tools
-License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT
+License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT NCSA Python-2.0
 Requires: qemu-bin
 Requires: qemu-setuid
 Requires: qemu-locales
@@ -41,6 +41,7 @@ BuildRequires : snappy-dev
 BuildRequires : spice
 BuildRequires : spice-dev
 BuildRequires : spice-protocol
+BuildRequires : usbredir-dev
 BuildRequires : util-linux-dev
 BuildRequires : zlib-dev
 Patch1: configure.patch
@@ -104,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1513200283
+export SOURCE_DATE_EPOCH=1516390636
 %configure --disable-static --disable-sdl \
 --enable-vnc \
 --enable-gtk \
@@ -119,7 +120,8 @@ export SOURCE_DATE_EPOCH=1513200283
 --enable-virtfs \
 --enable-vhost-net \
 --enable-vhdx \
---enable-uuid
+--enable-uuid \
+--enable-usb-redir
 make  %{?_smp_mflags}
 
 %check
@@ -130,7 +132,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1513200283
+export SOURCE_DATE_EPOCH=1516390636
 rm -rf %{buildroot}
 %make_install
 %find_lang qemu

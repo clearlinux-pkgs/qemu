@@ -21,5 +21,7 @@ librbd.so.1
 librt.so.1
 libsnappy.so.1
 libspice-server.so.1
+libusb-1.0.so.0
+libusbredirparser.so.1
 libutil.so.1
 libz.so.1

@@ -13,5 +13,5 @@
 --enable-vhost-net
 --enable-vhdx
 --enable-uuid
-#--enable-usb-redir
+--enable-usb-redir
 #--enable-curses

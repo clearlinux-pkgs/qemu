@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 2.11.0
-Release  : 71
+Release  : 72
 URL      : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2
 Source99 : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2.sig
@@ -105,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1516390636
+export SOURCE_DATE_EPOCH=1517701595
 %configure --disable-static --disable-sdl \
 --enable-vnc \
 --enable-gtk \
@@ -121,7 +121,8 @@ export SOURCE_DATE_EPOCH=1516390636
 --enable-vhost-net \
 --enable-vhdx \
 --enable-uuid \
---enable-usb-redir
+--enable-usb-redir \
+--python=/usr/bin/python2
 make  %{?_smp_mflags}
 
 %check
@@ -132,7 +133,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1516390636
+export SOURCE_DATE_EPOCH=1517701595
 rm -rf %{buildroot}
 %make_install
 %find_lang qemu

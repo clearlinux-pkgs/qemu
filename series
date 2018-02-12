@@ -15,3 +15,4 @@ cve-2017-15124.nopatch
 0011-ui-place-a-hard-cap-on-VNC-server-output-buffer-size.patch
 0012-ui-add-trace-events-related-to-VNC-client-throttling.patch
 0013-ui-mix-misleading-comments-return-types-of-VNC-I-O-h.patch
+glibc-2.27.patch

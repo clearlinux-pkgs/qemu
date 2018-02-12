@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 2.11.0
-Release  : 74
+Release  : 75
 URL      : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2
 Source0  : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2
 Source99 : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2.sig
@@ -61,6 +61,7 @@ Patch14: 0010-ui-fix-VNC-client-throttling-when-forced-update-is-r.patch
 Patch15: 0011-ui-place-a-hard-cap-on-VNC-server-output-buffer-size.patch
 Patch16: 0012-ui-add-trace-events-related-to-VNC-client-throttling.patch
 Patch17: 0013-ui-mix-misleading-comments-return-types-of-VNC-I-O-h.patch
+Patch18: glibc-2.27.patch
 
 %description
 Capstone is a disassembly framework with the target of becoming the ultimate
@@ -126,13 +127,14 @@ setuid components for the qemu package.
 %patch15 -p1
 %patch16 -p1
 %patch17 -p1
+%patch18 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1518462650
+export SOURCE_DATE_EPOCH=1518471527
 export CFLAGS="$CFLAGS -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -fstack-protector-strong "
 export FFLAGS="$CFLAGS -fstack-protector-strong "
@@ -164,7 +166,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1518462650
+export SOURCE_DATE_EPOCH=1518471527
 rm -rf %{buildroot}
 %make_install
 %find_lang qemu

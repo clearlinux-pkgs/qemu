@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x3353C9CEF108B584 (mdroth@utexas.edu)
 #
 Name     : qemu
-Version  : 2.11.0
-Release  : 75
-URL      : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2
-Source0  : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2
-Source99 : http://wiki.qemu-project.org/download/qemu-2.11.0.tar.bz2.sig
+Version  : 2.11.1
+Release  : 76
+URL      : http://wiki.qemu-project.org/download/qemu-2.11.1.tar.xz
+Source0  : http://wiki.qemu-project.org/download/qemu-2.11.1.tar.xz
+Source99 : http://wiki.qemu-project.org/download/qemu-2.11.1.tar.xz.sig
 Summary  : A lightweight multi-platform, multi-architecture disassembly framework
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT NCSA Python-2.0
@@ -48,20 +48,7 @@ Patch1: configure.patch
 Patch2: cores-default.patch
 Patch3: 0001-Use-run-lock.patch
 Patch4: cve-2017-15124.nopatch
-Patch5: 0001-ui-remove-sync-parameter-from-vnc_update_client.patch
-Patch6: 0002-ui-remove-unreachable-code-in-vnc_update_client.patch
-Patch7: 0003-ui-remove-redundant-indentation-in-vnc_client_update.patch
-Patch8: 0004-ui-avoid-pointless-VNC-updates-if-framebuffer-isn-t-.patch
-Patch9: 0005-ui-track-how-much-decoded-data-we-consumed-when-doin.patch
-Patch10: 0006-ui-introduce-enum-to-track-VNC-client-framebuffer-up.patch
-Patch11: 0007-ui-correctly-reset-framebuffer-update-state-after-pr.patch
-Patch12: 0008-ui-refactor-code-for-determining-if-an-update-should.patch
-Patch13: 0009-ui-fix-VNC-client-throttling-when-audio-capture-is-a.patch
-Patch14: 0010-ui-fix-VNC-client-throttling-when-forced-update-is-r.patch
-Patch15: 0011-ui-place-a-hard-cap-on-VNC-server-output-buffer-size.patch
-Patch16: 0012-ui-add-trace-events-related-to-VNC-client-throttling.patch
-Patch17: 0013-ui-mix-misleading-comments-return-types-of-VNC-I-O-h.patch
-Patch18: glibc-2.27.patch
+Patch5: glibc-2.27.patch
 
 %description
 Capstone is a disassembly framework with the target of becoming the ultimate
@@ -110,35 +97,22 @@ setuid components for the qemu package.
 
 
 %prep
-%setup -q -n qemu-2.11.0
+%setup -q -n qemu-2.11.1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
-%patch15 -p1
-%patch16 -p1
-%patch17 -p1
-%patch18 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1518471527
-export CFLAGS="$CFLAGS -fstack-protector-strong "
-export FCFLAGS="$CFLAGS -fstack-protector-strong "
-export FFLAGS="$CFLAGS -fstack-protector-strong "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong "
+export SOURCE_DATE_EPOCH=1518660678
+export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
+export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
+export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
 %configure --disable-static --disable-sdl \
 --enable-vnc \
 --enable-gtk \
@@ -166,7 +140,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1518471527
+export SOURCE_DATE_EPOCH=1518660678
 rm -rf %{buildroot}
 %make_install
 %find_lang qemu

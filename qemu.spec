@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x3353C9CEF108B584 (mdroth@utexas.edu)
 #
 Name     : qemu
-Version  : 2.12.0
-Release  : 77
-URL      : http://wiki.qemu-project.org/download/qemu-2.12.0.tar.xz
-Source0  : http://wiki.qemu-project.org/download/qemu-2.12.0.tar.xz
-Source99 : http://wiki.qemu-project.org/download/qemu-2.12.0.tar.xz.sig
+Version  : 2.11.1
+Release  : 76
+URL      : http://wiki.qemu-project.org/download/qemu-2.11.1.tar.xz
+Source0  : http://wiki.qemu-project.org/download/qemu-2.11.1.tar.xz
+Source99 : http://wiki.qemu-project.org/download/qemu-2.11.1.tar.xz.sig
 Summary  : A lightweight multi-platform, multi-architecture disassembly framework
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT NCSA Python-2.0
@@ -36,7 +36,6 @@ BuildRequires : pbr
 BuildRequires : pip
 BuildRequires : python-dev
 BuildRequires : python3-dev
-BuildRequires : qtbase-dev
 BuildRequires : setuptools
 BuildRequires : snappy-dev
 BuildRequires : spice
@@ -49,6 +48,7 @@ Patch1: configure.patch
 Patch2: cores-default.patch
 Patch3: 0001-Use-run-lock.patch
 Patch4: cve-2017-15124.nopatch
+Patch5: glibc-2.27.patch
 
 %description
 Capstone is a disassembly framework with the target of becoming the ultimate
@@ -97,17 +97,18 @@ setuid components for the qemu package.
 
 
 %prep
-%setup -q -n qemu-2.12.0
+%setup -q -n qemu-2.11.1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch5 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1524667316
+export SOURCE_DATE_EPOCH=1518660678
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
@@ -139,7 +140,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1524667316
+export SOURCE_DATE_EPOCH=1518660678
 rm -rf %{buildroot}
 %make_install
 %find_lang qemu
@@ -167,10 +168,10 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 /usr/share/qemu/QEMU,cgthree.bin
 /usr/share/qemu/QEMU,tcx.bin
+/usr/share/qemu/acpi-dsdt.aml
 /usr/share/qemu/bamboo.dtb
 /usr/share/qemu/bios-256k.bin
 /usr/share/qemu/bios.bin
-/usr/share/qemu/canyonlands.dtb
 /usr/share/qemu/efi-e1000.rom
 /usr/share/qemu/efi-e1000e.rom
 /usr/share/qemu/efi-eepro100.rom
@@ -179,7 +180,6 @@ rm -rf %{buildroot}
 /usr/share/qemu/efi-rtl8139.rom
 /usr/share/qemu/efi-virtio.rom
 /usr/share/qemu/efi-vmxnet3.rom
-/usr/share/qemu/hppa-firmware.img
 /usr/share/qemu/keymaps/ar
 /usr/share/qemu/keymaps/bepo
 /usr/share/qemu/keymaps/common
@@ -244,7 +244,6 @@ rm -rf %{buildroot}
 /usr/share/qemu/slof.bin
 /usr/share/qemu/spapr-rtas.bin
 /usr/share/qemu/trace-events-all
-/usr/share/qemu/u-boot-sam460-20100605.bin
 /usr/share/qemu/u-boot.e500
 /usr/share/qemu/vgabios-cirrus.bin
 /usr/share/qemu/vgabios-qxl.bin

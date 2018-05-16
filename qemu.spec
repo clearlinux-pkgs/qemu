@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 2.11.1
-Release  : 79
+Release  : 80
 URL      : http://wiki.qemu-project.org/download/qemu-2.11.1.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-2.11.1.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-2.11.1.tar.xz.sig

@@ -34,7 +34,7 @@ BuildRequires : m4
 BuildRequires : numactl-dev
 BuildRequires : pbr
 BuildRequires : pip
-BuildRequires : python-dev
+
 BuildRequires : python3-dev
 BuildRequires : setuptools
 BuildRequires : snappy-dev

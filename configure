@@ -14,5 +14,5 @@
 --enable-vhdx
 --enable-uuid
 --enable-usb-redir
---python=/usr/bin/python2
+--python=/usr/bin/python
 #--enable-curses

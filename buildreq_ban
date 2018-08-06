@@ -11,3 +11,4 @@ nettle-dev
 lzo-dev
 curl-dev
 pkgconfig(pixman-1)
+python-dev

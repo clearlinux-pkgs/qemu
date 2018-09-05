@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.12.1
-Release  : 84
+Release  : 85
 URL      : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
 Summary  : A lightweight multi-platform, multi-architecture disassembly framework
@@ -28,6 +28,7 @@ BuildRequires : gtk+-dev
 BuildRequires : libcap-dev
 BuildRequires : libcap-ng-dev
 BuildRequires : libjpeg-turbo-dev
+BuildRequires : libseccomp-dev
 BuildRequires : libtool
 BuildRequires : libtool-dev
 BuildRequires : m4
@@ -117,7 +118,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1533570476
+export SOURCE_DATE_EPOCH=1536164426
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -138,7 +139,8 @@ export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=use
 --enable-vhdx \
 --enable-uuid \
 --enable-usb-redir \
---python=/usr/bin/python
+--python=/usr/bin/python \
+--enable-seccomp
 make  %{?_smp_mflags}
 
 %check
@@ -149,7 +151,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1533570476
+export SOURCE_DATE_EPOCH=1536164426
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/qemu
 cp COPYING %{buildroot}/usr/share/doc/qemu/COPYING

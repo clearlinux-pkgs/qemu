@@ -19,6 +19,7 @@ libpthread.so.0
 librados.so.2
 librbd.so.1
 librt.so.1
+libseccomp.so.2
 libsnappy.so.1
 libspice-server.so.1
 libusb-1.0.so.0

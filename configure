@@ -15,4 +15,5 @@
 --enable-uuid
 --enable-usb-redir
 --python=/usr/bin/python
+--enable-seccomp
 #--enable-curses

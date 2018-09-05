@@ -26,3 +26,4 @@ libcap-ng-dev
 libcap-dev
 util-linux-dev
 usbredir-dev
+libseccomp-dev

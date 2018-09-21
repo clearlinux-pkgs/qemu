@@ -4,7 +4,7 @@
 #
 Name     : qemu
 Version  : 2.12.1
-Release  : 85
+Release  : 86
 URL      : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
 Summary  : A lightweight multi-platform, multi-architecture disassembly framework

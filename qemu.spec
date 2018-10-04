@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 2.12.1
-Release  : 88
+Release  : 89
 URL      : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz.sig
@@ -123,7 +123,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1538586452
+export SOURCE_DATE_EPOCH=1538689741
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -156,7 +156,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1538586452
+export SOURCE_DATE_EPOCH=1538689741
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp COPYING %{buildroot}/usr/share/package-licenses/qemu/COPYING
@@ -174,7 +174,6 @@ cp roms/SLOF/LICENSE %{buildroot}/usr/share/package-licenses/qemu/roms_SLOF_LICE
 cp roms/ipxe/COPYING %{buildroot}/usr/share/package-licenses/qemu/roms_ipxe_COPYING
 cp roms/ipxe/COPYING.GPLv2 %{buildroot}/usr/share/package-licenses/qemu/roms_ipxe_COPYING.GPLv2
 cp roms/ipxe/src/include/ipxe/efi/LICENCE %{buildroot}/usr/share/package-licenses/qemu/roms_ipxe_src_include_ipxe_efi_LICENCE
-cp roms/ipxe/src/util/licence.pl %{buildroot}/usr/share/package-licenses/qemu/roms_ipxe_src_util_licence.pl
 cp roms/openbios/COPYING %{buildroot}/usr/share/package-licenses/qemu/roms_openbios_COPYING
 cp roms/openbios/Documentation/kernel/COPYING %{buildroot}/usr/share/package-licenses/qemu/roms_openbios_Documentation_kernel_COPYING
 cp roms/openbios/utils/devbios/COPYING %{buildroot}/usr/share/package-licenses/qemu/roms_openbios_utils_devbios_COPYING
@@ -228,7 +227,6 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 %defattr(-,root,root,-)
 /usr/share/package-licenses/qemu/disas_libvixl_LICENCE
 /usr/share/package-licenses/qemu/roms_ipxe_src_include_ipxe_efi_LICENCE
-/usr/share/package-licenses/qemu/roms_ipxe_src_util_licence.pl
 /usr/share/package-licenses/qemu/roms_skiboot_LICENCE
 /usr/share/package-licenses/qemu/roms_u-boot-sam460ex_fs_jffs2_LICENCE
 /usr/share/qemu/QEMU,cgthree.bin

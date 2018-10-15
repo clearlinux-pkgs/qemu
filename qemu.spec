@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 2.12.1
-Release  : 89
+Release  : 90
 URL      : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz.sig
@@ -29,6 +29,7 @@ BuildRequires : ceph-dev
 BuildRequires : flex
 BuildRequires : glib-dev
 BuildRequires : gtk3-dev
+BuildRequires : libaio-dev
 BuildRequires : libcap-dev
 BuildRequires : libcap-ng-dev
 BuildRequires : libjpeg-turbo-dev
@@ -83,6 +84,7 @@ extras components for the qemu package.
 %package libexec
 Summary: libexec components for the qemu package.
 Group: Default
+Requires: qemu-license = %{version}-%{release}
 
 %description libexec
 libexec components for the qemu package.
@@ -123,7 +125,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1538689741
+export SOURCE_DATE_EPOCH=1539624016
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -141,11 +143,10 @@ export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=use
 --enable-cap-ng \
 --enable-virtfs \
 --enable-vhost-net \
---enable-vhdx \
---enable-uuid \
 --enable-usb-redir \
 --python=/usr/bin/python \
---enable-seccomp
+--enable-seccomp \
+--enable-linux-aio
 make  %{?_smp_mflags}
 
 %check
@@ -156,7 +157,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1538689741
+export SOURCE_DATE_EPOCH=1539624016
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp COPYING %{buildroot}/usr/share/package-licenses/qemu/COPYING

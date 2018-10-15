@@ -4,7 +4,6 @@
 #
 
 #qboot minimal build
-libaio-dev
 ncurses-dev
 gnutls-dev
 nettle-dev

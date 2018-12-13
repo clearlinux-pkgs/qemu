@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 2.12.1
-Release  : 91
+Release  : 92
 URL      : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz.sig
@@ -48,6 +48,7 @@ BuildRequires : zlib-dev
 Patch1: configure.patch
 Patch2: cores-default.patch
 Patch3: 0001-Use-run-lock.patch
+Patch4: CVE-2018-16867.patch
 
 %description
 Capstone is a disassembly framework with the target of becoming the ultimate
@@ -119,13 +120,14 @@ setuid components for the qemu package.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1539624016
+export SOURCE_DATE_EPOCH=1544718551
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -157,7 +159,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1539624016
+export SOURCE_DATE_EPOCH=1544718551
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp COPYING %{buildroot}/usr/share/package-licenses/qemu/COPYING
@@ -226,10 +228,6 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 
 %files data
 %defattr(-,root,root,-)
-/usr/share/package-licenses/qemu/disas_libvixl_LICENCE
-/usr/share/package-licenses/qemu/roms_ipxe_src_include_ipxe_efi_LICENCE
-/usr/share/package-licenses/qemu/roms_skiboot_LICENCE
-/usr/share/package-licenses/qemu/roms_u-boot-sam460ex_fs_jffs2_LICENCE
 /usr/share/qemu/QEMU,cgthree.bin
 /usr/share/qemu/QEMU,tcx.bin
 /usr/share/qemu/bamboo.dtb
@@ -335,12 +333,14 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 /usr/share/package-licenses/qemu/capstone_LICENSE.TXT
 /usr/share/package-licenses/qemu/capstone_LICENSE_LLVM.TXT
 /usr/share/package-licenses/qemu/capstone_bindings_python_LICENSE.TXT
+/usr/share/package-licenses/qemu/disas_libvixl_LICENCE
 /usr/share/package-licenses/qemu/dtc_README.license
 /usr/share/package-licenses/qemu/linux-headers_COPYING
 /usr/share/package-licenses/qemu/roms_QemuMacDrivers_COPYING
 /usr/share/package-licenses/qemu/roms_SLOF_LICENSE
 /usr/share/package-licenses/qemu/roms_ipxe_COPYING
 /usr/share/package-licenses/qemu/roms_ipxe_COPYING.GPLv2
+/usr/share/package-licenses/qemu/roms_ipxe_src_include_ipxe_efi_LICENCE
 /usr/share/package-licenses/qemu/roms_openbios_COPYING
 /usr/share/package-licenses/qemu/roms_openbios_Documentation_kernel_COPYING
 /usr/share/package-licenses/qemu/roms_openbios_utils_devbios_COPYING
@@ -351,6 +351,7 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 /usr/share/package-licenses/qemu/roms_seabios_COPYING
 /usr/share/package-licenses/qemu/roms_seabios_COPYING.LESSER
 /usr/share/package-licenses/qemu/roms_sgabios_COPYING
+/usr/share/package-licenses/qemu/roms_skiboot_LICENCE
 /usr/share/package-licenses/qemu/roms_skiboot_ccan_array_size_LICENSE
 /usr/share/package-licenses/qemu/roms_skiboot_ccan_build_assert_LICENSE
 /usr/share/package-licenses/qemu/roms_skiboot_ccan_check_type_LICENSE
@@ -361,6 +362,7 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 /usr/share/package-licenses/qemu/roms_skiboot_ccan_str_LICENSE
 /usr/share/package-licenses/qemu/roms_u-boot-sam460ex_COPYING
 /usr/share/package-licenses/qemu/roms_u-boot-sam460ex_board_ACube_bios_emulator_scitech_src_x86emu_LICENSE
+/usr/share/package-licenses/qemu/roms_u-boot-sam460ex_fs_jffs2_LICENCE
 /usr/share/package-licenses/qemu/roms_vgabios_COPYING
 /usr/share/package-licenses/qemu/slirp_COPYRIGHT
 /usr/share/package-licenses/qemu/tests_qemu-iotests_COPYING

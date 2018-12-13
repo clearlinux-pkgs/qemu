@@ -1,3 +1,4 @@
 configure.patch
 cores-default.patch
 0001-Use-run-lock.patch
+CVE-2018-16867.patch

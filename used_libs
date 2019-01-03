@@ -4,7 +4,6 @@ libaio.so.1
 libc.so.6
 libcairo.so.2
 libcap-ng.so.0
-libcap.so.2
 libepoxy.so.0
 libgbm.so.1
 libgcc_s.so.1

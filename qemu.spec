@@ -5,14 +5,14 @@
 # Source0 file verified with key 0x3353C9CEF108B584 (mdroth@utexas.edu)
 #
 Name     : qemu
-Version  : 2.12.1
-Release  : 94
-URL      : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
-Source0  : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz
-Source99 : http://wiki.qemu-project.org/download/qemu-2.12.1.tar.xz.sig
-Summary  : A lightweight multi-platform, multi-architecture disassembly framework
+Version  : 3.1.0
+Release  : 95
+URL      : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
+Source0  : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
+Source99 : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz.sig
+Summary  : A generic and open source machine emulator and virtualizer
 Group    : Development/Tools
-License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT NCSA Python-2.0
+License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT NCSA
 Requires: qemu-bin = %{version}-%{release}
 Requires: qemu-data = %{version}-%{release}
 Requires: qemu-libexec = %{version}-%{release}
@@ -48,12 +48,6 @@ BuildRequires : zlib-dev
 Patch1: configure.patch
 Patch2: cores-default.patch
 Patch3: 0001-Use-run-lock.patch
-Patch4: CVE-2018-16867.patch
-Patch5: CVE-2018-16872.patch
-Patch6: CVE-2018-19364.patch
-Patch7: CVE-2018-19489.patch
-Patch8: CVE-2018-20191.patch
-Patch9: CVE-2018-20124.patch
 
 %description
 Capstone is a disassembly framework with the target of becoming the ultimate
@@ -121,23 +115,17 @@ setuid components for the qemu package.
 
 
 %prep
-%setup -q -n qemu-2.12.1
+%setup -q -n qemu-3.1.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1546558800
+export SOURCE_DATE_EPOCH=1546872092
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -169,12 +157,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1546558800
+export SOURCE_DATE_EPOCH=1546872092
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp COPYING %{buildroot}/usr/share/package-licenses/qemu/COPYING
 cp COPYING.LIB %{buildroot}/usr/share/package-licenses/qemu/COPYING.LIB
-cp COPYING.PYTHON %{buildroot}/usr/share/package-licenses/qemu/COPYING.PYTHON
 cp LICENSE %{buildroot}/usr/share/package-licenses/qemu/LICENSE
 cp capstone/LICENSE.TXT %{buildroot}/usr/share/package-licenses/qemu/capstone_LICENSE.TXT
 cp capstone/LICENSE_LLVM.TXT %{buildroot}/usr/share/package-licenses/qemu/capstone_LICENSE_LLVM.TXT
@@ -209,7 +196,6 @@ cp roms/skiboot/ccan/str/LICENSE %{buildroot}/usr/share/package-licenses/qemu/ro
 cp roms/u-boot-sam460ex/COPYING %{buildroot}/usr/share/package-licenses/qemu/roms_u-boot-sam460ex_COPYING
 cp roms/u-boot-sam460ex/board/ACube/bios_emulator/scitech/src/x86emu/LICENSE %{buildroot}/usr/share/package-licenses/qemu/roms_u-boot-sam460ex_board_ACube_bios_emulator_scitech_src_x86emu_LICENSE
 cp roms/u-boot-sam460ex/fs/jffs2/LICENCE %{buildroot}/usr/share/package-licenses/qemu/roms_u-boot-sam460ex_fs_jffs2_LICENCE
-cp roms/vgabios/COPYING %{buildroot}/usr/share/package-licenses/qemu/roms_vgabios_COPYING
 cp slirp/COPYRIGHT %{buildroot}/usr/share/package-licenses/qemu/slirp_COPYRIGHT
 cp tests/qemu-iotests/COPYING %{buildroot}/usr/share/package-licenses/qemu/tests_qemu-iotests_COPYING
 cp ui/keycodemapdb/LICENSE.BSD %{buildroot}/usr/share/package-licenses/qemu/ui_keycodemapdb_LICENSE.BSD
@@ -225,6 +211,7 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 %exclude /usr/bin/qemu-img
 /usr/bin/ivshmem-client
 /usr/bin/ivshmem-server
+/usr/bin/qemu-edid
 /usr/bin/qemu-ga
 /usr/bin/qemu-i386
 /usr/bin/qemu-io
@@ -319,8 +306,10 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 /usr/share/qemu/trace-events-all
 /usr/share/qemu/u-boot-sam460-20100605.bin
 /usr/share/qemu/u-boot.e500
+/usr/share/qemu/vgabios-bochs-display.bin
 /usr/share/qemu/vgabios-cirrus.bin
 /usr/share/qemu/vgabios-qxl.bin
+/usr/share/qemu/vgabios-ramfb.bin
 /usr/share/qemu/vgabios-stdvga.bin
 /usr/share/qemu/vgabios-virtio.bin
 /usr/share/qemu/vgabios-vmware.bin
@@ -338,7 +327,6 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/qemu/COPYING
 /usr/share/package-licenses/qemu/COPYING.LIB
-/usr/share/package-licenses/qemu/COPYING.PYTHON
 /usr/share/package-licenses/qemu/LICENSE
 /usr/share/package-licenses/qemu/capstone_LICENSE.TXT
 /usr/share/package-licenses/qemu/capstone_LICENSE_LLVM.TXT
@@ -373,7 +361,6 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 /usr/share/package-licenses/qemu/roms_u-boot-sam460ex_COPYING
 /usr/share/package-licenses/qemu/roms_u-boot-sam460ex_board_ACube_bios_emulator_scitech_src_x86emu_LICENSE
 /usr/share/package-licenses/qemu/roms_u-boot-sam460ex_fs_jffs2_LICENCE
-/usr/share/package-licenses/qemu/roms_vgabios_COPYING
 /usr/share/package-licenses/qemu/slirp_COPYRIGHT
 /usr/share/package-licenses/qemu/tests_qemu-iotests_COPYING
 /usr/share/package-licenses/qemu/ui_keycodemapdb_LICENSE.BSD

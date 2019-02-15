@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 3.1.0
-Release  : 97
+Release  : 98
 URL      : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz.sig
@@ -52,6 +52,7 @@ Patch4: CVE-2018-16872.patch
 Patch5: CVE-2018-20191.patch
 Patch6: CVE-2018-20124.patch
 Patch7: CVE-2018-20123.patch
+Patch8: CVE-2019-6778.patch
 
 %description
 Capstone is a disassembly framework with the target of becoming the ultimate
@@ -127,13 +128,14 @@ setuid components for the qemu package.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1546988535
+export SOURCE_DATE_EPOCH=1550272448
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -165,7 +167,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1546988535
+export SOURCE_DATE_EPOCH=1550272448
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp COPYING %{buildroot}/usr/share/package-licenses/qemu/COPYING

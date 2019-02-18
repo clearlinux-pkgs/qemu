@@ -6,11 +6,11 @@
 #
 Name     : qemu
 Version  : 3.1.0
-Release  : 98
+Release  : 99
 URL      : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz.sig
-Summary  : A generic and open source machine emulator and virtualizer
+Summary  : A lightweight multi-platform, multi-architecture disassembly framework
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT NCSA
 Requires: qemu-bin = %{version}-%{release}
@@ -53,6 +53,7 @@ Patch5: CVE-2018-20191.patch
 Patch6: CVE-2018-20124.patch
 Patch7: CVE-2018-20123.patch
 Patch8: CVE-2019-6778.patch
+Patch9: CVE-2017-18043.nopatch
 
 %description
 Capstone is a disassembly framework with the target of becoming the ultimate
@@ -135,7 +136,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1550272448
+export SOURCE_DATE_EPOCH=1550508626
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -167,7 +168,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1550272448
+export SOURCE_DATE_EPOCH=1550508626
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp COPYING %{buildroot}/usr/share/package-licenses/qemu/COPYING
@@ -207,6 +208,8 @@ cp roms/u-boot-sam460ex/COPYING %{buildroot}/usr/share/package-licenses/qemu/rom
 cp roms/u-boot-sam460ex/board/ACube/bios_emulator/scitech/src/x86emu/LICENSE %{buildroot}/usr/share/package-licenses/qemu/roms_u-boot-sam460ex_board_ACube_bios_emulator_scitech_src_x86emu_LICENSE
 cp roms/u-boot-sam460ex/fs/jffs2/LICENCE %{buildroot}/usr/share/package-licenses/qemu/roms_u-boot-sam460ex_fs_jffs2_LICENCE
 cp slirp/COPYRIGHT %{buildroot}/usr/share/package-licenses/qemu/slirp_COPYRIGHT
+cp tests/fp/berkeley-softfloat-3/COPYING.txt %{buildroot}/usr/share/package-licenses/qemu/tests_fp_berkeley-softfloat-3_COPYING.txt
+cp tests/fp/berkeley-testfloat-3/COPYING.txt %{buildroot}/usr/share/package-licenses/qemu/tests_fp_berkeley-testfloat-3_COPYING.txt
 cp tests/qemu-iotests/COPYING %{buildroot}/usr/share/package-licenses/qemu/tests_qemu-iotests_COPYING
 cp ui/keycodemapdb/LICENSE.BSD %{buildroot}/usr/share/package-licenses/qemu/ui_keycodemapdb_LICENSE.BSD
 cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_keycodemapdb_LICENSE.GPL2
@@ -372,6 +375,8 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 /usr/share/package-licenses/qemu/roms_u-boot-sam460ex_board_ACube_bios_emulator_scitech_src_x86emu_LICENSE
 /usr/share/package-licenses/qemu/roms_u-boot-sam460ex_fs_jffs2_LICENCE
 /usr/share/package-licenses/qemu/slirp_COPYRIGHT
+/usr/share/package-licenses/qemu/tests_fp_berkeley-softfloat-3_COPYING.txt
+/usr/share/package-licenses/qemu/tests_fp_berkeley-testfloat-3_COPYING.txt
 /usr/share/package-licenses/qemu/tests_qemu-iotests_COPYING
 /usr/share/package-licenses/qemu/ui_keycodemapdb_LICENSE.BSD
 /usr/share/package-licenses/qemu/ui_keycodemapdb_LICENSE.GPL2

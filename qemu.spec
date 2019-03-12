@@ -6,11 +6,11 @@
 #
 Name     : qemu
 Version  : 3.1.0
-Release  : 100
+Release  : 101
 URL      : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz.sig
-Summary  : A lightweight multi-platform, multi-architecture disassembly framework
+Summary  : A generic and open source machine emulator and virtualizer
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT NCSA
 Requires: qemu-bin = %{version}-%{release}
@@ -138,7 +138,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1550609312
+export SOURCE_DATE_EPOCH=1552420744
+export LDFLAGS="${LDFLAGS} -fno-lto"
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -170,7 +171,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1550609312
+export SOURCE_DATE_EPOCH=1552420744
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp COPYING %{buildroot}/usr/share/package-licenses/qemu/COPYING
@@ -223,11 +224,11 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 
 %files bin
 %defattr(-,root,root,-)
+%exclude /usr/bin/qemu-ga
 %exclude /usr/bin/qemu-img
 /usr/bin/ivshmem-client
 /usr/bin/ivshmem-server
 /usr/bin/qemu-edid
-/usr/bin/qemu-ga
 /usr/bin/qemu-i386
 /usr/bin/qemu-io
 /usr/bin/qemu-keymap
@@ -332,6 +333,7 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 
 %files extras
 %defattr(-,root,root,-)
+/usr/bin/qemu-ga
 /usr/bin/qemu-img
 
 %files libexec

@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 3.1.0
-Release  : 101
+Release  : 102
 URL      : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz.sig
@@ -138,7 +138,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552420744
+export SOURCE_DATE_EPOCH=1552833132
 export LDFLAGS="${LDFLAGS} -fno-lto"
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -171,7 +171,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1552420744
+export SOURCE_DATE_EPOCH=1552833132
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp COPYING %{buildroot}/usr/share/package-licenses/qemu/COPYING
@@ -333,7 +333,6 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 
 %files extras
 %defattr(-,root,root,-)
-/usr/bin/qemu-ga
 /usr/bin/qemu-img
 
 %files libexec

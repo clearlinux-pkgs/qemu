@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 3.1.0
-Release  : 103
+Release  : 105
 URL      : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz.sig
@@ -56,6 +56,8 @@ Patch8: CVE-2019-6778.patch
 Patch9: CVE-2017-18043.nopatch
 Patch10: CVE-2019-3812.patch
 Patch11: CVE-2019-6501.patch
+Patch12: CVE-2018-20815.patch
+Patch13: CVE-2019-9824.patch
 
 %description
 Capstone is a disassembly framework with the target of becoming the ultimate
@@ -134,13 +136,15 @@ setuid components for the qemu package.
 %patch8 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
+%patch13 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552931503
+export SOURCE_DATE_EPOCH=1553728705
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -175,7 +179,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1552931503
+export SOURCE_DATE_EPOCH=1553728705
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp COPYING %{buildroot}/usr/share/package-licenses/qemu/COPYING

@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 3.1.0
-Release  : 105
+Release  : 106
 URL      : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz.sig

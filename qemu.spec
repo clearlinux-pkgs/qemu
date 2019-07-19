@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 3.1.0
-Release  : 106
+Release  : 107
 URL      : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source0  : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz
 Source99 : http://wiki.qemu-project.org/download/qemu-3.1.0.tar.xz.sig
@@ -143,8 +143,9 @@ setuid components for the qemu package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1553728705
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1563505075
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -172,14 +173,14 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-stron
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1553728705
+export SOURCE_DATE_EPOCH=1563505075
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp COPYING %{buildroot}/usr/share/package-licenses/qemu/COPYING
@@ -249,6 +250,7 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 
 %files data
 %defattr(-,root,root,-)
+%exclude /usr/share/qemu/u-boot.e500
 /usr/share/qemu/QEMU,cgthree.bin
 /usr/share/qemu/QEMU,tcx.bin
 /usr/share/qemu/bamboo.dtb
@@ -329,7 +331,6 @@ cp ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/ui_
 /usr/share/qemu/spapr-rtas.bin
 /usr/share/qemu/trace-events-all
 /usr/share/qemu/u-boot-sam460-20100605.bin
-/usr/share/qemu/u-boot.e500
 /usr/share/qemu/vgabios-bochs-display.bin
 /usr/share/qemu/vgabios-cirrus.bin
 /usr/share/qemu/vgabios-qxl.bin

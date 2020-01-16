@@ -1,5 +1,5 @@
 PKG_NAME := qemu
-URL = https://download.qemu.org/qemu-3.1.1.1.tar.xz
+URL = https://download.qemu.org/qemu-4.2.0.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common

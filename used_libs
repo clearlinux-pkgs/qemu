@@ -4,6 +4,7 @@ libaio.so.1
 libatk-1.0.so.0
 libbz2.so.1.0
 libc.so.6
+libcacard.so.0
 libcairo-gobject.so.2
 libcairo.so.2
 libcap-ng.so.0

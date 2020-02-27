@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 4.2.0
-Release  : 113
+Release  : 114
 URL      : https://download.qemu.org/qemu-4.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-4.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-4.2.0.tar.xz.sig
@@ -26,7 +26,6 @@ BuildRequires : buildreq-cmake
 BuildRequires : buildreq-cpan
 BuildRequires : buildreq-distutils3
 BuildRequires : buildreq-meson
-BuildRequires : buildreq-mvn
 BuildRequires : buildreq-qmake
 BuildRequires : ceph-dev
 BuildRequires : flex
@@ -126,7 +125,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1581383769
+export SOURCE_DATE_EPOCH=1582829367
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -162,7 +161,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1581383769
+export SOURCE_DATE_EPOCH=1582829367
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-4.2.0/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80

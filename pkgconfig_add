@@ -4,3 +4,5 @@
 #
 pixman-1
 libcacard
+libpulse
+alsa

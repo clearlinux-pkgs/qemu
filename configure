@@ -15,4 +15,5 @@
 --python=/usr/bin/python
 --enable-seccomp
 --enable-linux-aio
-#--enable-curses
+--audio-drv-list='pa,alsa,oss'
+--disable-curses

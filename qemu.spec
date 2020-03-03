@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 4.2.0
-Release  : 114
+Release  : 115
 URL      : https://download.qemu.org/qemu-4.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-4.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-4.2.0.tar.xz.sig
@@ -40,7 +40,9 @@ BuildRequires : libtool
 BuildRequires : libtool-dev
 BuildRequires : m4
 BuildRequires : numactl-dev
+BuildRequires : pkgconfig(alsa)
 BuildRequires : pkgconfig(libcacard)
+BuildRequires : pkgconfig(libpulse)
 BuildRequires : snappy-dev
 BuildRequires : spice
 BuildRequires : spice-dev
@@ -125,7 +127,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582829367
+export SOURCE_DATE_EPOCH=1583267792
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -150,7 +152,9 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-stron
 --enable-usb-redir \
 --python=/usr/bin/python \
 --enable-seccomp \
---enable-linux-aio
+--enable-linux-aio \
+--audio-drv-list='pa,alsa,oss' \
+--disable-curses
 make  %{?_smp_mflags}
 
 %check
@@ -161,7 +165,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1582829367
+export SOURCE_DATE_EPOCH=1583267792
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-4.2.0/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80

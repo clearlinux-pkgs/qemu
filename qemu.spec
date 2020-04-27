@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 4.2.0
-Release  : 117
+Release  : 118
 URL      : https://download.qemu.org/qemu-4.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-4.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-4.2.0.tar.xz.sig
@@ -58,6 +58,7 @@ Patch5: CVE-2020-7039.patch
 Patch6: CVE-2020-8608.patch
 Patch7: CVE-2020-1711.patch
 Patch8: CVE-2020-11102.patch
+Patch9: CVE-2020-1983.patch
 
 %description
 Capstone is a disassembly framework with the target of becoming the ultimate
@@ -116,6 +117,7 @@ setuid components for the qemu package.
 
 %prep
 %setup -q -n qemu-4.2.0
+cd %{_builddir}/qemu-4.2.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -124,13 +126,14 @@ setuid components for the qemu package.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1586224349
+export SOURCE_DATE_EPOCH=1588025340
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -168,7 +171,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make check || :
 
 %install
-export SOURCE_DATE_EPOCH=1586224349
+export SOURCE_DATE_EPOCH=1588025340
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-4.2.0/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80

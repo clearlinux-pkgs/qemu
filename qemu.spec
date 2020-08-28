@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 5.1.0
-Release  : 119
+Release  : 120
 URL      : https://download.qemu.org/qemu-5.1.0.tar.xz
 Source0  : https://download.qemu.org/qemu-5.1.0.tar.xz
 Source1  : https://download.qemu.org/qemu-5.1.0.tar.xz.sig
@@ -132,7 +132,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1598307357
+export SOURCE_DATE_EPOCH=1598644271
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -167,10 +167,10 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make check || :
+make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1598307357
+export SOURCE_DATE_EPOCH=1598644271
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-5.1.0/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80

@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 5.1.0
-Release  : 120
+Release  : 121
 URL      : https://download.qemu.org/qemu-5.1.0.tar.xz
 Source0  : https://download.qemu.org/qemu-5.1.0.tar.xz
 Source1  : https://download.qemu.org/qemu-5.1.0.tar.xz.sig

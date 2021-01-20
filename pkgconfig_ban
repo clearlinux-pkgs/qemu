@@ -3,3 +3,5 @@
 # undesirable. One name per line, no whitespace.
 #
 gtk+-2.0
+slirp
+u2f-emu

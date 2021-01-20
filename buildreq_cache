@@ -1,0 +1,6 @@
+5.2.0
+pkgconfig(capstone)
+pkgconfig(libkeyutils)
+pkgconfig(libudev)
+pkgconfig(slirp)
+pkgconfig(u2f-emu)

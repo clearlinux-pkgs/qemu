@@ -2,3 +2,5 @@
 # names, one per line.
 /usr/bin/qemu-ga
 /usr/share/qemu/u-boot.e500
+/usr/share/man/man7/qemu-ga-ref.7
+/usr/share/man/man8/qemu-ga.8

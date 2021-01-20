@@ -6,13 +6,13 @@
 #
 Name     : qemu
 Version  : 5.2.0
-Release  : 122
+Release  : 123
 URL      : https://download.qemu.org/qemu-5.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-5.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-5.2.0.tar.xz.sig
 Summary  : A lightweight multi-platform, multi-architecture disassembly framework
 Group    : Development/Tools
-License  : Apache-2.0 BSD-2-Clause BSD-2-Clause-Patent BSD-3-Clause BSD-4-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.0+ LGPL-2.1 LGPL-3.0 MIT NCSA OpenSSL
+License  : Apache-2.0 BSD-2-Clause BSD-2-Clause-Patent BSD-3-Clause BSD-4-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.1 LGPL-2.1+ LGPL-3.0 MIT NCSA OpenSSL
 Requires: qemu-bin = %{version}-%{release}
 Requires: qemu-data = %{version}-%{release}
 Requires: qemu-libexec = %{version}-%{release}
@@ -154,7 +154,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1611169847
+export SOURCE_DATE_EPOCH=1611172048
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -192,7 +192,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1611169847
+export SOURCE_DATE_EPOCH=1611172048
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-5.2.0/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80
@@ -208,6 +208,7 @@ cp %{_builddir}/qemu-5.2.0/meson/COPYING %{buildroot}/usr/share/package-licenses
 cp %{_builddir}/qemu-5.2.0/meson/msi/License.rtf %{buildroot}/usr/share/package-licenses/qemu/00dcd169768382e0b6a13d0d110266754fedb62b
 cp %{_builddir}/qemu-5.2.0/roms/QemuMacDrivers/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80
 cp %{_builddir}/qemu-5.2.0/roms/SLOF/LICENSE %{buildroot}/usr/share/package-licenses/qemu/e1f0ad62e4850a19b1f56b821f37fccbf84ec191
+cp %{_builddir}/qemu-5.2.0/roms/edk2/.pytool/Plugin/LicenseCheck/LicenseCheck_plug_in.yaml %{buildroot}/usr/share/package-licenses/qemu/f1a6a8f321d20cb5fbec859a848bff49ad31de69
 cp %{_builddir}/qemu-5.2.0/roms/edk2/ArmPkg/Library/ArmSoftFloatLib/berkeley-softfloat-3/COPYING.txt %{buildroot}/usr/share/package-licenses/qemu/c4cd5ba6f665cf9ecb44e0620c2c76140566cfc6
 cp %{_builddir}/qemu-5.2.0/roms/edk2/BaseTools/Source/C/BrotliCompress/brotli/LICENSE %{buildroot}/usr/share/package-licenses/qemu/c045813a6c514f2d30d60a07c6aaf3603850e608
 cp %{_builddir}/qemu-5.2.0/roms/edk2/CryptoPkg/Library/OpensslLib/openssl/LICENSE %{buildroot}/usr/share/package-licenses/qemu/607e96d7bc75d9f884a8e210d276cca4006e0753
@@ -216,6 +217,7 @@ cp %{_builddir}/qemu-5.2.0/roms/edk2/License-History.txt %{buildroot}/usr/share/
 cp %{_builddir}/qemu-5.2.0/roms/edk2/License.txt %{buildroot}/usr/share/package-licenses/qemu/7fc5c71d1c403b07043376504d62f2ac73a75313
 cp %{_builddir}/qemu-5.2.0/roms/edk2/MdeModulePkg/Library/BrotliCustomDecompressLib/brotli/LICENSE %{buildroot}/usr/share/package-licenses/qemu/c045813a6c514f2d30d60a07c6aaf3603850e608
 cp %{_builddir}/qemu-5.2.0/roms/edk2/MdeModulePkg/Universal/RegularExpressionDxe/oniguruma/COPYING %{buildroot}/usr/share/package-licenses/qemu/fa8fca82526cc5174bb568accab23c3eb9c049ea
+cp %{_builddir}/qemu-5.2.0/roms/edk2/OvmfPkg/Bhyve/License.txt %{buildroot}/usr/share/package-licenses/qemu/6b5c7cbcd561ea8f6bba9dd24393f995c1a006e9
 cp %{_builddir}/qemu-5.2.0/roms/edk2/OvmfPkg/License.txt %{buildroot}/usr/share/package-licenses/qemu/c9c057d4dc70e7a834d80b762663ca01a852ed13
 cp %{_builddir}/qemu-5.2.0/roms/edk2/UnitTestFrameworkPkg/Library/CmockaLib/cmocka/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b8b815229aa8a61e483fb4ba0588b8b6c491890
 cp %{_builddir}/qemu-5.2.0/roms/edk2/UnitTestFrameworkPkg/Library/CmockaLib/cmocka/cmake/Modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/qemu/ff3ed70db4739b3c6747c7f624fe2bad70802987
@@ -260,6 +262,8 @@ cp %{_builddir}/qemu-5.2.0/ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/p
 ## Remove excluded files
 rm -f %{buildroot}/usr/bin/qemu-ga
 rm -f %{buildroot}/usr/share/qemu/u-boot.e500
+rm -f %{buildroot}/usr/share/man/man7/qemu-ga-ref.7
+rm -f %{buildroot}/usr/share/man/man8/qemu-ga.8
 
 %files
 %defattr(-,root,root,-)
@@ -432,6 +436,7 @@ rm -f %{buildroot}/usr/share/qemu/u-boot.e500
 /usr/share/package-licenses/qemu/3f226d574cd9547c3e4d934bb1ac4be3601a9782
 /usr/share/package-licenses/qemu/4cc77b90af91e615a64ae04893fdffa7939db84c
 /usr/share/package-licenses/qemu/607e96d7bc75d9f884a8e210d276cca4006e0753
+/usr/share/package-licenses/qemu/6b5c7cbcd561ea8f6bba9dd24393f995c1a006e9
 /usr/share/package-licenses/qemu/7475b0da13789cd598fe0703f5337d37dd8b0b95
 /usr/share/package-licenses/qemu/7de9d56eea42f5bbbba6fff880d912f2c9c3a45d
 /usr/share/package-licenses/qemu/7fc5c71d1c403b07043376504d62f2ac73a75313
@@ -453,6 +458,7 @@ rm -f %{buildroot}/usr/share/qemu/u-boot.e500
 /usr/share/package-licenses/qemu/e7d563f52bf5295e6dba1d67ac23e9f6a160fab9
 /usr/share/package-licenses/qemu/e9b568889ca9075b505c509f7a877a723cc9a4b0
 /usr/share/package-licenses/qemu/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8
+/usr/share/package-licenses/qemu/f1a6a8f321d20cb5fbec859a848bff49ad31de69
 /usr/share/package-licenses/qemu/fa8fca82526cc5174bb568accab23c3eb9c049ea
 /usr/share/package-licenses/qemu/ff3ed70db4739b3c6747c7f624fe2bad70802987
 
@@ -464,9 +470,7 @@ rm -f %{buildroot}/usr/share/qemu/u-boot.e500
 /usr/share/man/man1/virtiofsd.1
 /usr/share/man/man7/qemu-block-drivers.7
 /usr/share/man/man7/qemu-cpu-models.7
-/usr/share/man/man7/qemu-ga-ref.7
 /usr/share/man/man7/qemu-qmp-ref.7
-/usr/share/man/man8/qemu-ga.8
 /usr/share/man/man8/qemu-nbd.8
 /usr/share/man/man8/qemu-pr-helper.8
 

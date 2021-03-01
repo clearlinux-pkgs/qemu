@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 5.2.0
-Release  : 123
+Release  : 124
 URL      : https://download.qemu.org/qemu-5.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-5.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-5.2.0.tar.xz.sig
@@ -59,6 +59,7 @@ BuildRequires : zlib-dev
 Patch1: 0001-Allow-unknown-options-in-configure-script.patch
 Patch2: 0002-Set-default-number-of-sockets-to-1.patch
 Patch3: 0003-Use-run-lock.patch
+Patch4: 0004-build-no-pie-is-no-functional-linker-flag.patch
 
 %description
 Capstone is a disassembly framework with the target of becoming the ultimate
@@ -148,13 +149,14 @@ cd %{_builddir}/qemu-5.2.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1611172048
+export SOURCE_DATE_EPOCH=1614636429
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -192,7 +194,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1611172048
+export SOURCE_DATE_EPOCH=1614636429
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-5.2.0/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80

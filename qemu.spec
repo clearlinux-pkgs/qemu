@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 5.2.0
-Release  : 124
+Release  : 125
 URL      : https://download.qemu.org/qemu-5.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-5.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-5.2.0.tar.xz.sig

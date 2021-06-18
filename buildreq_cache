@@ -1,6 +1,11 @@
-5.2.0
+6.0.0
+acl-dev
+fuse-dev
 pkgconfig(capstone)
+pkgconfig(fuse3)
+pkgconfig(glusterfs-api)
+pkgconfig(libcurl)
+pkgconfig(libiscsi)
 pkgconfig(libkeyutils)
 pkgconfig(libudev)
-pkgconfig(slirp)
-pkgconfig(u2f-emu)
+pkgconfig(libzstd)

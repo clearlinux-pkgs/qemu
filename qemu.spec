@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 6.1.0
-Release  : 129
+Release  : 130
 URL      : https://download.qemu.org/qemu-6.1.0.tar.xz
 Source0  : https://download.qemu.org/qemu-6.1.0.tar.xz
 Source1  : https://download.qemu.org/qemu-6.1.0.tar.xz.sig
@@ -22,7 +22,6 @@ Requires: qemu-man = %{version}-%{release}
 Requires: qemu-setuid = %{version}-%{release}
 BuildRequires : Sphinx
 BuildRequires : acl-dev
-BuildRequires : apache-ant
 BuildRequires : attr-dev
 BuildRequires : automake-dev
 BuildRequires : bison

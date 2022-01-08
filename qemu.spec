@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 6.2.0
-Release  : 133
+Release  : 134
 URL      : https://download.qemu.org/qemu-6.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-6.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-6.2.0.tar.xz.sig
@@ -22,7 +22,6 @@ Requires: qemu-license = %{version}-%{release}
 Requires: qemu-locales = %{version}-%{release}
 Requires: qemu-man = %{version}-%{release}
 Requires: qemu-setuid = %{version}-%{release}
-BuildRequires : Sphinx
 BuildRequires : acl-dev
 BuildRequires : attr-dev
 BuildRequires : automake-dev
@@ -70,9 +69,10 @@ BuildRequires : pkgconfig(nettle)
 BuildRequires : pkgconfig(virglrenderer)
 BuildRequires : pkgconfig(vte-2.91)
 BuildRequires : pypi(setuptools)
+BuildRequires : pypi(sphinx_rtd_theme)
 BuildRequires : pypi(wheel)
+BuildRequires : pypi-sphinx
 BuildRequires : snappy-dev
-BuildRequires : sphinx_rtd_theme
 BuildRequires : spice
 BuildRequires : spice-dev
 BuildRequires : spice-protocol
@@ -214,7 +214,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640647934
+export SOURCE_DATE_EPOCH=1641667702
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -280,7 +280,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1640647934
+export SOURCE_DATE_EPOCH=1641667702
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-6.2.0/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80

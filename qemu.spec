@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 6.2.0
-Release  : 134
+Release  : 135
 URL      : https://download.qemu.org/qemu-6.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-6.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-6.2.0.tar.xz.sig
@@ -45,6 +45,7 @@ BuildRequires : libjpeg-turbo-dev
 BuildRequires : libseccomp-dev
 BuildRequires : libtool
 BuildRequires : libtool-dev
+BuildRequires : liburing-dev
 BuildRequires : m4
 BuildRequires : nfs-utils-dev
 BuildRequires : numactl-dev
@@ -214,7 +215,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641667702
+export SOURCE_DATE_EPOCH=1642524450
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -241,7 +242,9 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-st
 --enable-seccomp \
 --enable-linux-aio \
 --audio-drv-list='pa,alsa,oss' \
---disable-curses
+--disable-curses \
+--enable-lto \
+--enable-linux-io-uring
 make  %{?_smp_mflags}
 
 unset PKG_CONFIG_PATH
@@ -269,7 +272,9 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 --enable-seccomp \
 --enable-linux-aio \
 --audio-drv-list='pa,alsa,oss' \
---disable-curses
+--disable-curses \
+--enable-lto \
+--enable-linux-io-uring
 make  %{?_smp_mflags}
 popd
 %check
@@ -280,7 +285,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1641667702
+export SOURCE_DATE_EPOCH=1642524450
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-6.2.0/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80

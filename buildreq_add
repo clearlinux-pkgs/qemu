@@ -31,3 +31,6 @@ spice-protocol
 usbredir-dev
 util-linux-dev
 zlib-dev
+liburing-dev
+libssh-dev
+libssh2-dev

@@ -17,3 +17,5 @@
 --enable-linux-aio
 --audio-drv-list='pa,alsa,oss'
 --disable-curses
+--enable-lto
+--enable-linux-io-uring

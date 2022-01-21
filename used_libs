@@ -37,6 +37,7 @@ librbd.so.1
 libseccomp.so.2
 libsnappy.so.1
 libspice-server.so.1
+libssh.so.4
 libudev.so.1
 liburing.so.2
 libusb-1.0.so.0

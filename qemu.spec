@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 6.2.0
-Release  : 136
+Release  : 137
 URL      : https://download.qemu.org/qemu-6.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-6.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-6.2.0.tar.xz.sig
@@ -15,6 +15,8 @@ Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-2-Clause-Patent BSD-3-Clause BSD-4-Clause CC0-1.0 GPL-2.0 GPL-2.0+ GPL-3.0 LGPL-2.1 LGPL-2.1+ LGPL-3.0 MIT NCSA OpenSSL
 Requires: qemu-bin = %{version}-%{release}
 Requires: qemu-data = %{version}-%{release}
+Requires: qemu-filemap = %{version}-%{release}
+Requires: qemu-lib = %{version}-%{release}
 Requires: qemu-libexec = %{version}-%{release}
 Requires: qemu-license = %{version}-%{release}
 Requires: qemu-locales = %{version}-%{release}
@@ -95,6 +97,7 @@ Requires: qemu-data = %{version}-%{release}
 Requires: qemu-libexec = %{version}-%{release}
 Requires: qemu-setuid = %{version}-%{release}
 Requires: qemu-license = %{version}-%{release}
+Requires: qemu-filemap = %{version}-%{release}
 
 %description bin
 bin components for the qemu package.
@@ -111,6 +114,7 @@ data components for the qemu package.
 %package dev
 Summary: dev components for the qemu package.
 Group: Development
+Requires: qemu-lib = %{version}-%{release}
 Requires: qemu-bin = %{version}-%{release}
 Requires: qemu-data = %{version}-%{release}
 Provides: qemu-devel = %{version}-%{release}
@@ -137,10 +141,31 @@ Group: Default
 extras components for the qemu package.
 
 
+%package filemap
+Summary: filemap components for the qemu package.
+Group: Default
+
+%description filemap
+filemap components for the qemu package.
+
+
+%package lib
+Summary: lib components for the qemu package.
+Group: Libraries
+Requires: qemu-data = %{version}-%{release}
+Requires: qemu-libexec = %{version}-%{release}
+Requires: qemu-license = %{version}-%{release}
+Requires: qemu-filemap = %{version}-%{release}
+
+%description lib
+lib components for the qemu package.
+
+
 %package libexec
 Summary: libexec components for the qemu package.
 Group: Default
 Requires: qemu-license = %{version}-%{release}
+Requires: qemu-filemap = %{version}-%{release}
 
 %description libexec
 libexec components for the qemu package.
@@ -183,13 +208,16 @@ setuid components for the qemu package.
 cd %{_builddir}/qemu-6.2.0
 %patch1 -p1
 %patch2 -p1
+pushd ..
+cp -a qemu-6.2.0 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1642733678
+export SOURCE_DATE_EPOCH=1642811591
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -221,6 +249,36 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-st
 --enable-linux-io-uring
 make  %{?_smp_mflags}
 
+unset PKG_CONFIG_PATH
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+%configure --disable-static --disable-sdl \
+--enable-vnc \
+--enable-gtk \
+--enable-kvm \
+--disable-strip \
+--target-list='i386-softmmu x86_64-softmmu i386-linux-user x86_64-linux-user' \
+--enable-spice \
+--enable-rbd \
+--extra-cflags="-O3" \
+--enable-attr \
+--enable-cap-ng \
+--enable-virtfs \
+--enable-vhost-net \
+--enable-usb-redir \
+--python=/usr/bin/python \
+--enable-seccomp \
+--enable-linux-aio \
+--audio-drv-list='pa,alsa,oss' \
+--disable-curses \
+--enable-lto \
+--enable-linux-io-uring
+make  %{?_smp_mflags}
+popd
 %check
 export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
@@ -229,7 +287,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1642733678
+export SOURCE_DATE_EPOCH=1642811591
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-6.2.0/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80
@@ -296,6 +354,9 @@ cp %{_builddir}/qemu-6.2.0/tests/fp/berkeley-testfloat-3/COPYING.txt %{buildroot
 cp %{_builddir}/qemu-6.2.0/tests/uefi-test-tools/LICENSE %{buildroot}/usr/share/package-licenses/qemu/234e74aeab28f7faad2baccf1a3f943b36ab895e
 cp %{_builddir}/qemu-6.2.0/ui/keycodemapdb/LICENSE.BSD %{buildroot}/usr/share/package-licenses/qemu/ea5b412c09f3b29ba1d81a61b878c5c16ffe69d8
 cp %{_builddir}/qemu-6.2.0/ui/keycodemapdb/LICENSE.GPL2 %{buildroot}/usr/share/package-licenses/qemu/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
+pushd ../buildavx2/
+%make_install_v3
+popd
 %make_install
 %find_lang qemu
 ## Remove excluded files
@@ -304,6 +365,7 @@ rm -f %{buildroot}*/usr/share/qemu/u-boot.e500
 rm -f %{buildroot}*/usr/share/man/man7/qemu-ga-ref.7
 rm -f %{buildroot}*/usr/share/man/man8/qemu-ga.8
 rm -f %{buildroot}*/usr/share/doc/qemu/.buildinfo
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name} --skip-path /usr/libexec/qemu-bridge-helper
 
 %files
 %defattr(-,root,root,-)
@@ -321,6 +383,7 @@ rm -f %{buildroot}*/usr/share/doc/qemu/.buildinfo
 /usr/bin/qemu-system-i386
 /usr/bin/qemu-system-x86_64
 /usr/bin/qemu-x86_64
+/usr/share/clear/optimized-elf/bin*
 
 %files data
 %defattr(-,root,root,-)
@@ -457,11 +520,20 @@ rm -f %{buildroot}*/usr/share/doc/qemu/.buildinfo
 %defattr(-,root,root,-)
 /usr/bin/qemu-img
 
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-qemu
+
+%files lib
+%defattr(-,root,root,-)
+/usr/share/clear/optimized-elf/other*
+
 %files libexec
 %defattr(-,root,root,-)
 /usr/libexec/vhost-user-gpu
 /usr/libexec/virtfs-proxy-helper
 /usr/libexec/virtiofsd
+/usr/share/clear/optimized-elf/exec*
 
 %files license
 %defattr(0644,root,root,0755)

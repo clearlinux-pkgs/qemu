@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 6.2.0
-Release  : 138
+Release  : 139
 URL      : https://download.qemu.org/qemu-6.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-6.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-6.2.0.tar.xz.sig

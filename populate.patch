@@ -1,0 +1,10 @@
+--- qemu-6.2.0/util/mmap-alloc.c~	2021-12-14 20:42:02.000000000 +0000
++++ qemu-6.2.0/util/mmap-alloc.c	2022-03-08 18:33:26.072913461 +0000
+@@ -206,6 +206,7 @@
+     if (shared && sync) {
+         map_sync_flags = MAP_SYNC | MAP_SHARED_VALIDATE;
+     }
++    map_sync_flags |= MAP_POPULATE;
+ 
+     activated_ptr = mmap(ptr, size, prot, flags | map_sync_flags, fd,
+                          map_offset);

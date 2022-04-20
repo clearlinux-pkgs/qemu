@@ -1,4 +1,4 @@
-6.2.0
+7.0.0
 acl-dev
 fuse-dev
 libgcrypt-dev
@@ -14,7 +14,6 @@ pkgconfig(libiscsi)
 pkgconfig(libkeyutils)
 pkgconfig(libpmem)
 pkgconfig(libudev)
-pkgconfig(liburing)
 pkgconfig(libzstd)
 pkgconfig(nettle)
 pkgconfig(virglrenderer)

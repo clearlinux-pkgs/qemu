@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 7.0.0
-Release  : 143
+Release  : 144
 URL      : https://download.qemu.org/qemu-7.0.0.tar.xz
 Source0  : https://download.qemu.org/qemu-7.0.0.tar.xz
 Source1  : https://download.qemu.org/qemu-7.0.0.tar.xz.sig
@@ -217,7 +217,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1650413873
+export SOURCE_DATE_EPOCH=1656376265
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -287,7 +287,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1650413873
+export SOURCE_DATE_EPOCH=1656376265
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-7.0.0/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80
@@ -367,7 +367,7 @@ rm -f %{buildroot}*/usr/share/qemu/u-boot.e500
 rm -f %{buildroot}*/usr/share/man/man7/qemu-ga-ref.7
 rm -f %{buildroot}*/usr/share/man/man8/qemu-ga.8
 rm -f %{buildroot}*/usr/share/doc/qemu/.buildinfo
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name} --skip-path /usr/libexec/qemu-bridge-helper
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name} --skip-path /usr/libexec/qemu-bridge-helper
 
 %files
 %defattr(-,root,root,-)

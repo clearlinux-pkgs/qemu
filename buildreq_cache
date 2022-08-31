@@ -1,10 +1,12 @@
-7.0.0
+7.1.0
 acl-dev
 fuse-dev
 libgcrypt-dev
+pkgconfig(canokey-qemu)
 pkgconfig(capstone)
 pkgconfig(fuse3)
 pkgconfig(glusterfs-api)
+pkgconfig(gmp)
 pkgconfig(gnutls)
 pkgconfig(jack)
 pkgconfig(libbpf)
@@ -18,4 +20,5 @@ pkgconfig(libzstd)
 pkgconfig(nettle)
 pkgconfig(virglrenderer)
 pkgconfig(vte-2.91)
+pkgconfig(xencontrol)
 vte-dev

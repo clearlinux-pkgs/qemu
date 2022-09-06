@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 7.1.0
-Release  : 149
+Release  : 150
 URL      : https://download.qemu.org/qemu-7.1.0.tar.xz
 Source0  : https://download.qemu.org/qemu-7.1.0.tar.xz
 Source1  : https://download.qemu.org/qemu-7.1.0.tar.xz.sig
@@ -22,6 +22,8 @@ Requires: qemu-license = %{version}-%{release}
 Requires: qemu-locales = %{version}-%{release}
 Requires: qemu-man = %{version}-%{release}
 Requires: qemu-setuid = %{version}-%{release}
+BuildRequires : SDL2-dev
+BuildRequires : SDL2_image-dev
 BuildRequires : acl-dev
 BuildRequires : attr-dev
 BuildRequires : automake-dev
@@ -230,7 +232,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1661968633
+export SOURCE_DATE_EPOCH=1662475245
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -239,7 +241,7 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
-%configure --disable-static --disable-sdl \
+%configure --disable-static --enable-sdl \
 --enable-vnc \
 --enable-gtk \
 --enable-kvm \
@@ -256,7 +258,7 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-st
 --python=/usr/bin/python \
 --enable-seccomp \
 --enable-linux-aio \
---audio-drv-list='pa,alsa,oss' \
+--audio-drv-list='pa,alsa,oss,sdl' \
 --disable-curses \
 --enable-lto \
 --enable-linux-io-uring
@@ -269,7 +271,7 @@ export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
-%configure --disable-static --disable-sdl \
+%configure --disable-static --enable-sdl \
 --enable-vnc \
 --enable-gtk \
 --enable-kvm \
@@ -286,7 +288,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 --python=/usr/bin/python \
 --enable-seccomp \
 --enable-linux-aio \
---audio-drv-list='pa,alsa,oss' \
+--audio-drv-list='pa,alsa,oss,sdl' \
 --disable-curses \
 --enable-lto \
 --enable-linux-io-uring
@@ -300,7 +302,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1661968633
+export SOURCE_DATE_EPOCH=1662475245
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-%{version}/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80 || :

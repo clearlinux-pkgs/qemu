@@ -1,4 +1,4 @@
---disable-sdl
+--enable-sdl
 --enable-vnc
 --enable-gtk
 --enable-kvm
@@ -15,7 +15,7 @@
 --python=/usr/bin/python
 --enable-seccomp
 --enable-linux-aio
---audio-drv-list='pa,alsa,oss'
+--audio-drv-list='pa,alsa,oss,sdl'
 --disable-curses
 --enable-lto
 --enable-linux-io-uring

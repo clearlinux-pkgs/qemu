@@ -34,3 +34,4 @@ zlib-dev
 liburing-dev
 libssh-dev
 libssh2-dev
+SDL2_image-dev

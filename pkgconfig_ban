@@ -8,3 +8,4 @@ u2f-emu
 libselinux
 xencontrol
 canokey-qemu
+sdl2_image

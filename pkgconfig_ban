@@ -9,3 +9,5 @@ libselinux
 xencontrol
 canokey-qemu
 sdl2_image
+blkio
+sndio

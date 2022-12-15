@@ -1,14 +1,14 @@
-7.1.0
-SDL2-dev
+7.2.0
 acl-dev
 fuse-dev
 libgcrypt-dev
-pkgconfig(canokey-qemu)
+pkgconfig(blkio)
 pkgconfig(capstone)
 pkgconfig(fuse3)
 pkgconfig(glusterfs-api)
 pkgconfig(gmp)
 pkgconfig(gnutls)
+pkgconfig(gvnc-1.0)
 pkgconfig(jack)
 pkgconfig(libbpf)
 pkgconfig(libcurl)
@@ -19,8 +19,7 @@ pkgconfig(libpmem)
 pkgconfig(libudev)
 pkgconfig(libzstd)
 pkgconfig(nettle)
-pkgconfig(sdl2_image)
+pkgconfig(sndio)
 pkgconfig(virglrenderer)
 pkgconfig(vte-2.91)
-pkgconfig(xencontrol)
 vte-dev

@@ -39,6 +39,7 @@ librados.so.2
 librbd.so.1
 libsasl2.so.3
 libseccomp.so.2
+libslirp.so.0
 libsnappy.so.1
 libspice-server.so.1
 libssh.so.4

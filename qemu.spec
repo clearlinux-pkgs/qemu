@@ -6,7 +6,7 @@
 #
 Name     : qemu
 Version  : 7.2.0
-Release  : 155
+Release  : 156
 URL      : https://download.qemu.org/qemu-7.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-7.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-7.2.0.tar.xz.sig
@@ -43,6 +43,7 @@ BuildRequires : libcap-ng-dev
 BuildRequires : libgcrypt-dev
 BuildRequires : libjpeg-turbo-dev
 BuildRequires : libseccomp-dev
+BuildRequires : libslirp-dev
 BuildRequires : libssh-dev
 BuildRequires : libssh2-dev
 BuildRequires : libtool
@@ -232,7 +233,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1671128834
+export SOURCE_DATE_EPOCH=1671580012
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -302,7 +303,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1671128834
+export SOURCE_DATE_EPOCH=1671580012
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-%{version}/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80 || :

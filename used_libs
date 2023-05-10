@@ -29,14 +29,13 @@ libiscsi.so.9
 libjack.so.0
 libjpeg.so.62
 libkeyutils.so.1
+liblzo2.so.2
 libm.so.6
 libnuma.so.1
 libpixman-1.so.0
 libpmem.so.1
 libpng16.so.16
 libpulse.so.0
-librados.so.2
-librbd.so.1
 libsasl2.so.3
 libseccomp.so.2
 libslirp.so.0

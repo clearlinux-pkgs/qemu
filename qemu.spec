@@ -7,7 +7,7 @@
 #
 Name     : qemu
 Version  : 7.2.1
-Release  : 162
+Release  : 163
 URL      : https://download.qemu.org/qemu-7.2.1.tar.xz
 Source0  : https://download.qemu.org/qemu-7.2.1.tar.xz
 Source1  : https://download.qemu.org/qemu-7.2.1.tar.xz.sig
@@ -19,7 +19,6 @@ Requires: qemu-data = %{version}-%{release}
 Requires: qemu-libexec = %{version}-%{release}
 Requires: qemu-license = %{version}-%{release}
 Requires: qemu-locales = %{version}-%{release}
-Requires: qemu-man = %{version}-%{release}
 Requires: qemu-setuid = %{version}-%{release}
 BuildRequires : SDL2_image-dev
 BuildRequires : acl-dev
@@ -135,15 +134,6 @@ Requires: qemu = %{version}-%{release}
 dev components for the qemu package.
 
 
-%package doc
-Summary: doc components for the qemu package.
-Group: Documentation
-Requires: qemu-man = %{version}-%{release}
-
-%description doc
-doc components for the qemu package.
-
-
 %package extras
 Summary: extras components for the qemu package.
 Group: Default
@@ -177,14 +167,6 @@ Group: Default
 locales components for the qemu package.
 
 
-%package man
-Summary: man components for the qemu package.
-Group: Default
-
-%description man
-man components for the qemu package.
-
-
 %package setuid
 Summary: setuid components for the qemu package.
 Group: Default
@@ -196,9 +178,9 @@ setuid components for the qemu package.
 %prep
 %setup -q -n qemu-7.2.1
 cd %{_builddir}/qemu-7.2.1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
+%patch -P 3 -p1
 pushd ..
 cp -a qemu-7.2.1 buildavx2
 popd
@@ -208,7 +190,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685544810
+export SOURCE_DATE_EPOCH=1687228580
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -278,7 +260,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1685544810
+export SOURCE_DATE_EPOCH=1687228580
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-%{version}/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80 || :
@@ -517,10 +499,6 @@ rm -f %{buildroot}*/usr/share/doc/qemu/.buildinfo
 %defattr(-,root,root,-)
 /usr/include/qemu-plugin.h
 
-%files doc
-%defattr(0644,root,root,0755)
-/usr/share/doc/qemu/*
-
 %files extras
 %defattr(-,root,root,-)
 /V3/usr/bin/qemu-img
@@ -579,20 +557,6 @@ rm -f %{buildroot}*/usr/share/doc/qemu/.buildinfo
 /usr/share/package-licenses/qemu/fa82ae23fff791a399cb3c72b59fe7199e989652
 /usr/share/package-licenses/qemu/fa8fca82526cc5174bb568accab23c3eb9c049ea
 /usr/share/package-licenses/qemu/ff3ed70db4739b3c6747c7f624fe2bad70802987
-
-%files man
-%defattr(0644,root,root,0755)
-/usr/share/man/man1/qemu-img.1
-/usr/share/man/man1/qemu-storage-daemon.1
-/usr/share/man/man1/qemu.1
-/usr/share/man/man1/virtfs-proxy-helper.1
-/usr/share/man/man1/virtiofsd.1
-/usr/share/man/man7/qemu-block-drivers.7
-/usr/share/man/man7/qemu-cpu-models.7
-/usr/share/man/man7/qemu-qmp-ref.7
-/usr/share/man/man7/qemu-storage-daemon-qmp-ref.7
-/usr/share/man/man8/qemu-nbd.8
-/usr/share/man/man8/qemu-pr-helper.8
 
 %files setuid
 %defattr(-,root,root,-)

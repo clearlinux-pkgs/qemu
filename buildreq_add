@@ -6,7 +6,6 @@ pypi-sphinx
 attr-dev
 automake-dev
 bison
-ceph-dev
 flex
 glib-dev
 gtk3-dev

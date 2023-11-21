@@ -7,7 +7,7 @@
 #
 Name     : qemu
 Version  : 7.2.1
-Release  : 165
+Release  : 166
 URL      : https://download.qemu.org/qemu-7.2.1.tar.xz
 Source0  : https://download.qemu.org/qemu-7.2.1.tar.xz
 Source1  : https://download.qemu.org/qemu-7.2.1.tar.xz.sig

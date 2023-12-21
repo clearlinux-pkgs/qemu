@@ -9,9 +9,10 @@ libc.so.6
 libcacard.so.0
 libcairo.so.2
 libcap-ng.so.0
-libcapstone.so.4
+libcapstone.so.5
 libcurl.so.4
 libdaxctl.so.1
+libdw.so.1
 libepoxy.so.0
 libfuse3.so.3
 libgbm.so.1
@@ -32,6 +33,7 @@ libkeyutils.so.1
 liblzo2.so.2
 libm.so.6
 libnuma.so.1
+libpipewire-0.3.so.0
 libpixman-1.so.0
 libpmem.so.1
 libpng16.so.16

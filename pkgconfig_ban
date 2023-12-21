@@ -11,3 +11,5 @@ canokey-qemu
 sdl2_image
 blkio
 sndio
+rutabaga_gfx_ffi
+libxdp

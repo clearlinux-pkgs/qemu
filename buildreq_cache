@@ -1,5 +1,4 @@
-7.2.1
-acl-dev
+8.2.0
 fuse-dev
 libgcrypt-dev
 pkgconfig(capstone)
@@ -13,12 +12,20 @@ pkgconfig(jack)
 pkgconfig(libbpf)
 pkgconfig(libcurl)
 pkgconfig(libdaxctl)
+pkgconfig(libdw)
 pkgconfig(libiscsi)
 pkgconfig(libkeyutils)
+pkgconfig(libpipewire-0.3)
 pkgconfig(libpmem)
 pkgconfig(libudev)
+pkgconfig(libxdp)
 pkgconfig(libzstd)
 pkgconfig(nettle)
+pkgconfig(rutabaga_gfx_ffi)
+pkgconfig(sysprof-capture-4)
+pkgconfig(valgrind)
 pkgconfig(virglrenderer)
 pkgconfig(vte-2.91)
+python3-dev
+valgrind
 vte-dev

@@ -9,7 +9,7 @@
 #
 Name     : qemu
 Version  : 8.2.0
-Release  : 169
+Release  : 170
 URL      : https://download.qemu.org/qemu-8.2.0.tar.xz
 Source0  : https://download.qemu.org/qemu-8.2.0.tar.xz
 Source1  : https://download.qemu.org/qemu-8.2.0.tar.xz.sig
@@ -28,6 +28,7 @@ BuildRequires : attr-dev
 BuildRequires : automake-dev
 BuildRequires : bison
 BuildRequires : buildreq-configure
+BuildRequires : dtc-dev
 BuildRequires : flex
 BuildRequires : fuse-dev
 BuildRequires : glib-dev
@@ -199,7 +200,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1703175892
+export SOURCE_DATE_EPOCH=1703181259
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -289,7 +290,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1703175892
+export SOURCE_DATE_EPOCH=1703181259
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qemu
 cp %{_builddir}/qemu-%{version}/COPYING %{buildroot}/usr/share/package-licenses/qemu/2b9d60c2972b476384af9900276837ac81954e80 || :
@@ -356,6 +357,10 @@ rm -f %{buildroot}*/usr/share/qemu/u-boot.e500
 rm -f %{buildroot}*/usr/share/man/man7/qemu-ga-ref.7
 rm -f %{buildroot}*/usr/share/man/man8/qemu-ga.8
 rm -f %{buildroot}*/usr/share/doc/qemu/.buildinfo
+rm -f %{buildroot}*/usr/include/fdt.h
+rm -f %{buildroot}*/usr/include/libfdt.h
+rm -f %{buildroot}*/usr/include/libfdt_env.h
+rm -f %{buildroot}*/usr/lib64/pkgconfig/libfdt.pc
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name} --skip-path /usr/libexec/qemu-bridge-helper
 
 %files
@@ -516,11 +521,7 @@ rm -f %{buildroot}*/usr/share/doc/qemu/.buildinfo
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/fdt.h
-/usr/include/libfdt.h
-/usr/include/libfdt_env.h
 /usr/include/qemu-plugin.h
-/usr/lib64/pkgconfig/libfdt.pc
 
 %files doc
 %defattr(0644,root,root,0755)

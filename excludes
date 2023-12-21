@@ -5,3 +5,7 @@
 /usr/share/man/man7/qemu-ga-ref.7
 /usr/share/man/man8/qemu-ga.8
 /usr/share/doc/qemu/.buildinfo
+/usr/include/fdt.h
+/usr/include/libfdt.h
+/usr/include/libfdt_env.h
+/usr/lib64/pkgconfig/libfdt.pc

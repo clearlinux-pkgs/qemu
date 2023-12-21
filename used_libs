@@ -14,6 +14,7 @@ libcurl.so.4
 libdaxctl.so.1
 libdw.so.1
 libepoxy.so.0
+libfdt.so.1
 libfuse3.so.3
 libgbm.so.1
 libgcc_s.so.1

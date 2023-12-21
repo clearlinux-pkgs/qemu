@@ -36,3 +36,4 @@ libssh2-dev
 SDL2_image-dev
 libslirp-dev
 ninja
+dtc-dev

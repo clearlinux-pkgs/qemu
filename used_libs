@@ -27,7 +27,7 @@ libgmodule-2.0.so.0
 libgnutls.so.30
 libgobject-2.0.so.0
 libgtk-3.so.0
-libiscsi.so.9
+libiscsi.so.10
 libjack.so.0
 libjpeg.so.62
 libkeyutils.so.1

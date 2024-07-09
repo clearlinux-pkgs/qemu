@@ -37,3 +37,5 @@ SDL2_image-dev
 libslirp-dev
 ninja
 dtc-dev
+pypi-sphinx_rtd_theme
+pypi-sphinx

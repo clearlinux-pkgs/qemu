@@ -19,3 +19,4 @@
 --disable-curses
 --enable-lto
 --enable-linux-io-uring
+--without-docs

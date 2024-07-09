@@ -1,4 +1,4 @@
-9.0.0
+9.0.1
 fuse-dev
 libgcrypt-dev
 pkgconfig(capstone)
@@ -7,7 +7,6 @@ pkgconfig(gbm)
 pkgconfig(glusterfs-api)
 pkgconfig(gmp)
 pkgconfig(gnutls)
-pkgconfig(gvnc-1.0)
 pkgconfig(jack)
 pkgconfig(libbpf)
 pkgconfig(libcurl)
@@ -20,7 +19,6 @@ pkgconfig(libpmem)
 pkgconfig(libudev)
 pkgconfig(libzstd)
 pkgconfig(nettle)
-pkgconfig(sysprof-capture-4)
 pkgconfig(virglrenderer)
 pkgconfig(vte-2.91)
 vte-dev

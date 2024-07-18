@@ -1,4 +1,4 @@
-9.0.1
+9.0.2
 fuse-dev
 libgcrypt-dev
 pkgconfig(capstone)

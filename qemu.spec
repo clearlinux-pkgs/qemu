@@ -9,7 +9,7 @@
 #
 Name     : qemu
 Version  : 9.0.2
-Release  : 180
+Release  : 181
 URL      : https://download.qemu.org/qemu-9.0.2.tar.xz
 Source0  : https://download.qemu.org/qemu-9.0.2.tar.xz
 Source1  : https://download.qemu.org/qemu-9.0.2.tar.xz.sig

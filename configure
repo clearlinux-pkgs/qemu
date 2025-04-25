@@ -12,7 +12,6 @@
 --enable-virtfs
 --enable-vhost-net
 --enable-usb-redir
---python=/usr/bin/python
 --enable-seccomp
 --enable-linux-aio
 --audio-drv-list='pa,alsa,oss,sdl'

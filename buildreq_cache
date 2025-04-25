@@ -1,4 +1,4 @@
-9.1.1
+10.0.0
 fuse-dev
 libgcrypt-dev
 pkgconfig(capstone)
@@ -10,6 +10,7 @@ pkgconfig(gnutls)
 pkgconfig(gvnc-1.0)
 pkgconfig(jack)
 pkgconfig(libbpf)
+pkgconfig(libcbor)
 pkgconfig(libcurl)
 pkgconfig(libdaxctl)
 pkgconfig(libdw)

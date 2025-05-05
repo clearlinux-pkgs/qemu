@@ -9,7 +9,7 @@
 #
 Name     : qemu
 Version  : 10.0.0
-Release  : 186
+Release  : 187
 URL      : https://download.qemu.org/qemu-10.0.0.tar.xz
 Source0  : https://download.qemu.org/qemu-10.0.0.tar.xz
 Source1  : https://download.qemu.org/qemu-10.0.0.tar.xz.sig
